@@ -115,7 +115,7 @@ public class ActivityTest extends BaseActivity implements View.OnClickListener, 
     }
 
     @Override
-    public void onNotifyCallback(int i, int i1, byte[] bytes) {
+    public void onNotifyCallback(int i, int i1, byte[] bytes, String uuid) {
         JMeshLog.e("callback", HexUtils.formatHexString(bytes));
     }
 }

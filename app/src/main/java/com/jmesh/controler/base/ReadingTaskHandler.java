@@ -1,6 +1,5 @@
 package com.jmesh.controler.base;
 
-import com.jmesh.appbase.base.ToastUtils;
 import com.jmesh.blebase.base.BleManager;
 import com.jmesh.blebase.bluetooth.GattHandler;
 import com.jmesh.blebase.state.BleDevice;
@@ -31,8 +30,8 @@ public class ReadingTaskHandler implements GattHandler.OnNotifyCallback {
         return readingTaskHandler;
     }
 
-    public static final String SendCharacterist = "00002afe-0000-1000-8000-00805f9b34fb";
-    public static final String NotifyCharacterist = "00002aff-0000-1000-8000-00805f9b34fb";
+    public static final String SEND_CHARACTERIST = "00002afe-0000-1000-8000-00805f9b34fb";
+    public static final String NOTIFY_CHARACTERIST = "00002aff-0000-1000-8000-00805f9b34fb";
 
     private String macStr;
     private TaskBase taskBase;
@@ -85,15 +84,14 @@ public class ReadingTaskHandler implements GattHandler.OnNotifyCallback {
         if (bleDevice == null) {
             return;
         }
-        int notifyInstance = bleDevice.getInstanceIdByUuid(NotifyCharacterist);
-        int sendInstance = bleDevice.getInstanceIdByUuid(SendCharacterist);
+        int sendInstance = bleDevice.getInstanceIdByUuid(SEND_CHARACTERIST);
         GattHandler.getInstance().setOnNotifyCallback(this);
-        if (!bleDevice.hasNotified(NotifyCharacterist)) {
+        if (!bleDevice.hasNotified(NOTIFY_CHARACTERIST)) {
             GattHandler.getInstance().setMtu(bleDevice.getKey(), 100);
-            GattHandler.getInstance().enableNotify(bleDevice.getKey(), notifyInstance);
+            GattHandler.getInstance().enableNotifyByUUID(bleDevice.getKey(), NOTIFY_CHARACTERIST);
         }
-        bleDevice.getCharacteristicsByInstanceId(sendInstance);
         GattHandler.getInstance().write(bleDevice.getKey(), sendInstance, data);
+        GattHandler.getInstance().writeByUuid(bleDevice.getKey(), SEND_CHARACTERIST, data);
     }
 
     public void start() {
@@ -111,7 +109,7 @@ public class ReadingTaskHandler implements GattHandler.OnNotifyCallback {
 
 
     @Override
-    public void onNotifyCallback(int i, int i1, byte[] bytes) {
+    public void onNotifyCallback(int i, int i1, byte[] bytes, String uuid) {
         byte[] resolvedData = taskBase.resolveData(bytes);
         if (callback != null) {
             taskBase.setResultData(resolvedData);
