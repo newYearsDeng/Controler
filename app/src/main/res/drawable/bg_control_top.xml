@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/black_20" />
+        </shape>
+    </item>
+    <item
+        android:bottom="@dimen/dp_17"
+        android:left="@dimen/dp_17"
+        android:right="@dimen/dp_17"
+        android:top="@dimen/dp_17">
+        <shape android:shape="oval">
+            <solid android:color="@color/black_3" />
+        </shape>
+    </item>
+    <item
+        android:bottom="@dimen/dp_18"
+        android:left="@dimen/dp_18"
+        android:right="@dimen/dp_18"
+        android:top="@dimen/dp_18">
+        <shape android:shape="oval">
+            <solid android:color="@color/black_7" />
+        </shape>
+    </item>
+    <item
+        android:bottom="@dimen/dp_19"
+        android:left="@dimen/dp_19"
+        android:right="@dimen/dp_19"
+        android:top="@dimen/dp_19">
+        <shape android:shape="oval">
+            <solid android:color="@color/black_10" />
+        </shape>
+    </item>
+    <item
+        android:bottom="@dimen/dp_20"
+        android:left="20dp"
+        android:right="@dimen/dp_20"
+        android:top="@dimen/dp_20">
+        <shape android:shape="oval">
+            <solid android:color="#496793" />
+        </shape>
+    </item>
+
+
+</layer-list>

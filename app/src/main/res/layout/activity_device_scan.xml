@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/device_scan_bt_tx"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:gravity="center_vertical"
+        android:text="@string/bluetooth"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_19"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.jmesh.appbase.ui.widget.MyToggleButton
+        android:id="@+id/device_scan_open_bt_bn"
+        android:layout_width="@dimen/dp_66"
+        android:layout_height="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_18"
+        app:layout_constraintBottom_toBottomOf="@id/device_scan_bt_tx"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/device_scan_bt_tx"
+        app:slide_color="#84C7EE"
+        app:stroke_color="#46628F"
+        app:stroke_wide="1px"
+        app:switch_off_color="@color/transparent"
+        app:switch_on_color="@color/black_50" />
+
+    <View
+        android:id="@+id/device_scan_division"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/device_scan_bt_tx" />
+
+    <TextView
+        android:id="@+id/device_scan_tx_scan_devices"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_46"
+        android:background="@color/transparent"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_30"
+        android:text="@string/device_avaliable"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dp_18"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/device_scan_division" />
+
+    <View
+        android:id="@+id/device_scan_division_x"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/device_scan_tx_scan_devices" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/device_scan_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/device_scan_division_x" />
+
+
+    <TextView
+        android:id="@+id/device_scan_bn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_50"
+        android:background="@drawable/bg_scan_refresh_button"
+        android:paddingBottom="@dimen/dp_7"
+        android:paddingLeft="@dimen/dp_18"
+        android:paddingRight="@dimen/dp_19"
+        android:paddingTop="@dimen/dp_7"
+        android:text="@string/refresh"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_17"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+</android.support.constraint.ConstraintLayout>

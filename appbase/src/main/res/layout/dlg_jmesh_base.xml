@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dp_40"
+    android:layout_marginRight="@dimen/dp_40"
+    android:padding="@dimen/dp_20"
+    android:background="@drawable/bg_white_corner"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:textStyle="bold"
+        android:id="@+id/dlg_jmesh_base_title"
+        android:textSize="@dimen/sp_18"
+        android:textColor="@color/color_333333"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/dlg_jmesh_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/dp_15"
+        app:layout_constraintTop_toBottomOf="@id/dlg_jmesh_base_title"
+        tools:layout_editor_absoluteX="20dp" />
+    <TextView
+        android:background="@drawable/bg_press_grey"
+        android:padding="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="confirm"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/dlg_jmesh_confirm"
+        app:layout_constraintTop_toBottomOf="@id/dlg_jmesh_message"
+        android:textColor="@color/app_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:background="@drawable/bg_press_grey"
+        android:text="cancel"
+        android:padding="@dimen/dp_10"
+        android:id="@+id/dlg_jmesh_cancel"
+        android:layout_marginRight="@dimen/dp_20"
+        app:layout_constraintRight_toLeftOf="@id/dlg_jmesh_confirm"
+        app:layout_constraintTop_toTopOf="@id/dlg_jmesh_confirm"
+        app:layout_constraintBottom_toBottomOf="@id/dlg_jmesh_confirm"
+        android:textColor="@color/color_999999"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</android.support.constraint.ConstraintLayout>

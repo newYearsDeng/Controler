@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:id="@+id/brand_list"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_18"
+            android:layout_marginTop="@dimen/dp_18"
+            android:background="@drawable/solid_white_corner_5"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingBottom="@dimen/dp_22"
+                android:paddingTop="@dimen/dp_22"
+                android:text="@string/brand_choose"
+                android:textColor="@color/black_333333"
+                android:textSize="@dimen/sp_19" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#747474" />
+
+            <TextView
+                android:textSize="@dimen/sp_19"
+                android:id="@+id/confirm_bn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingBottom="@dimen/dp_20"
+                android:paddingTop="@dimen/dp_20"
+                android:text="@string/confirm" />
+        </LinearLayout>
+
+        <com.jmesh.appbase.ui.widget.JmeshDraweeView
+            android:id="@+id/brand_choose_close"
+            android:layout_width="@dimen/dp_36"
+            android:layout_height="@dimen/dp_36"
+            android:layout_gravity="right|top"
+            android:background="@drawable/white_oval"
+            app:placeholderImage="@mipmap/icon_close" />
+    </FrameLayout>
+</FrameLayout>

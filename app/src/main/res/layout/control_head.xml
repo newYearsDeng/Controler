@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/control_meter_top"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_42"
+    android:background="@drawable/bg_control_top"
+    android:paddingBottom="@dimen/dp_30"
+    android:paddingLeft="@dimen/dp_46"
+    android:paddingRight="@dimen/dp_46"
+    android:paddingTop="@dimen/dp_48"
+    app:layout_constraintDimensionRatio="1:1"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <com.jmesh.appbase.ui.widget.JmeshDraweeView
+        android:id="@+id/control_head_icon"
+        android:layout_width="@dimen/dp_90"
+        android:layout_height="@dimen/dp_90"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:placeholderImage="@mipmap/icon_device_bd_energy_meter_big" />
+
+    <TextView
+        android:id="@+id/control_head_top_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/control_head_icon"
+        app:layout_constraintLeft_toLeftOf="@id/control_head_icon"
+        app:layout_constraintRight_toRightOf="@id/control_head_icon"
+        app:layout_constraintTop_toTopOf="@id/control_head_icon" />
+
+    <View
+        android:id="@+id/control_head_division"
+        android:layout_width="@dimen/dp_180"
+        android:layout_height="1px"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/control_head_icon" />
+
+    <TextView
+        android:id="@+id/control_head_first_info"
+        style="@style/control_text_default_style"
+        android:layout_marginTop="@dimen/dp_6"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/control_head_division" />
+
+    <TextView
+        android:id="@+id/control_head_second_info"
+        style="@style/control_text_default_style"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/control_head_first_info" />
+
+    <TextView
+        android:id="@+id/control_head_third_info"
+        style="@style/control_text_default_style"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/control_head_second_info" />
+
+    <TextView
+        android:id="@+id/control_head_more"
+        style="@style/control_text_default_style"
+        android:text="@string/more_with_ellipsis"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/control_head_third_info" />
+</android.support.constraint.ConstraintLayout>

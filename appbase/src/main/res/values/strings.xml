@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">蓝牙点对点</string>
+    <!--network-->
+    <string name="net_error_bad_response">服务器返回的数据有问题</string>
+    <string name="net_error_break_pipe_line">与服务器的连接断开了</string>
+    <string name="net_error_copy_file_fail">复制文件失败</string>
+    <string name="net_error_data_format_error">数据解析错误</string>
+    <string name="net_error_file_invalid">文件验证错误,可能被劫持</string>
+    <string name="net_error_net_error">网络错误</string>
+    <string name="net_error_net_un_connect">貌似您的手机没有连接网络</string>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MyToggleButton">
+        <attr name="switch_on_color" format="color" />
+        <attr name="switch_off_color" format="color" />
+        <attr name="slide_color" format="color" />
+        <attr name="stroke_wide" format="dimension" />
+        <attr name="stroke_color" format="color" />
+        <attr name="switch_duration" format="integer" />
+        <attr name="switch_on_text_color" format="color" />
+        <attr name="switch_off_text_color" format="color" />
+        <attr name="switch_on_text" format="string" />
+        <attr name="switch_off_text" format="string" />
+        <attr name="switch_text_size" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="FlowLayout_Layout">
+        <attr name="layout_gravity" format="integer">
+            <enum name="center_vertical" value="100" />
+            <enum name="top" value="101" />
+            <enum name="bottom" value="102" />
+        </attr>
+    </declare-styleable>
+</resources>

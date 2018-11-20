@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">蓝牙点对点</string>
+    <string name="add_device">添加设备</string>
+    <string name="device_avaliable">可用设备</string>
+    <string name="bluetooth">蓝牙</string>
+    <string name="my_device">我的设备</string>
+
+    <string name="switch_on_off">开关</string>
+
+    <!-- air conditioner-->
+    <string name="air_conditioner_mode">模式</string>
+    <string name="air_conditioner_temperature">温度</string>
+    <string name="air_conditioner_dirction">风向</string>
+    <string name="air_conditioner_speed">风速</string>
+
+    <string name="refresh">刷新</string>
+
+    <string name="more_with_ellipsis">更多...</string>
+
+    <string name="device_list">设备列表</string>
+    <string name="temperture_unit">°C</string>
+    <string name="brand_choose">品牌选择</string>
+    <string name="confirm">确认</string>
+    <string name="refrigeration">制冷</string>
+    <string name="heat">制热</string>
+    <string name="dehumid">除湿</string>
+    <string name="simple_blow">送风</string>
+    <string name="auto">自动</string>
+
+    <string name="wind_strength_low">低风</string>
+    <string name="wind_strength_mid">中风</string>
+    <string name="wind_strength_high">高风</string>
+
+    <string name="connecting">正在连接...</string>
+    <string name="connecting_success">连接成功！</string>
+    <string name="connecting_failed">连接失败，重新连接中</string>
+    <string name="disconnect">断开连接了.</string>
+    <string name="control_switch_on">合闸</string>
+    <string name="control_switch_off">跳闸</string>
+</resources>

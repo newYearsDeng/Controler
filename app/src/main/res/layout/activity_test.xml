@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/mac_enter"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_50"
+        android:minWidth="@dimen/dp_100"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_15" />
+
+    <Button
+        android:id="@+id/connect_bn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="连接"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_15" />
+
+    <EditText
+        android:id="@+id/data_enter"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_50"
+        android:minWidth="@dimen/dp_100"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_15" />
+
+    <Button
+        android:id="@+id/send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发送数据"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_15" />
+
+    <TextView
+        android:id="@+id/receive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="接收到的数据"
+        android:minHeight="@dimen/dp_50"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_15" />
+
+    <com.jmesh.controler.ui.widget.DrawText
+        android:layout_width="250dp"
+        android:layout_height="100dp" />
+</LinearLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="content_view" type="id"/>
+    <item name="bn_nav_left" type="id"/>
+    <item name="bn_nav_right" type="id"/>
+    <item name="label_nva_title" type="id"/>
+    <item name="popup_window" type="id"/>
+</resources>

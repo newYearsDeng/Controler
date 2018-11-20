@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/solid_white_corner_5">
+
+    <com.jmesh.appbase.ui.widget.JmeshDraweeView
+        android:id="@+id/dlg_mode_refrigeration_icon"
+        style="@style/choose_icon_style"
+        android:layout_marginTop="@dimen/dp_13"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/dlg_mode_heat_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:placeholderImage="@mipmap/icon_airconditioner_refrigeration_pressed" />
+
+    <TextView
+        android:id="@+id/dlg_mode_refrigeration_text"
+        style="@style/choose_mode_text_style"
+        android:layout_marginTop="@dimen/dp_4"
+        android:text="@string/refrigeration"
+        app:layout_constraintLeft_toLeftOf="@id/dlg_mode_refrigeration_icon"
+        app:layout_constraintRight_toRightOf="@id/dlg_mode_refrigeration_icon"
+        app:layout_constraintTop_toBottomOf="@id/dlg_mode_refrigeration_icon" />
+
+    <com.jmesh.appbase.ui.widget.JmeshDraweeView
+        android:id="@+id/dlg_mode_heat_icon"
+        style="@style/choose_icon_style"
+        app:layout_constraintBottom_toBottomOf="@id/dlg_mode_refrigeration_icon"
+        app:layout_constraintLeft_toRightOf="@id/dlg_mode_refrigeration_icon"
+        app:layout_constraintRight_toLeftOf="@id/dlg_mode_dehumidification_icon"
+        app:layout_constraintTop_toTopOf="@id/dlg_mode_refrigeration_icon"
+        app:placeholderImage="@mipmap/icon_airconditioner_heat_pressed" />
+
+    <TextView
+        android:id="@+id/dlg_mode_heat_text"
+        style="@style/choose_mode_text_style"
+        android:layout_marginTop="@dimen/dp_4"
+        android:text="@string/heat"
+        app:layout_constraintLeft_toLeftOf="@id/dlg_mode_heat_icon"
+        app:layout_constraintRight_toRightOf="@id/dlg_mode_heat_icon"
+        app:layout_constraintTop_toBottomOf="@id/dlg_mode_heat_icon" />
+
+    <com.jmesh.appbase.ui.widget.JmeshDraweeView
+        android:id="@+id/dlg_mode_dehumidification_icon"
+        style="@style/choose_icon_style"
+        app:layout_constraintBottom_toBottomOf="@id/dlg_mode_refrigeration_icon"
+        app:layout_constraintLeft_toRightOf="@id/dlg_mode_heat_icon"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/dlg_mode_refrigeration_icon"
+        app:placeholderImage="@mipmap/icon_airconditioner_dehumidification_pressed" />
+
+    <TextView
+        android:id="@+id/dlg_mode_dehumidification_text"
+        style="@style/choose_mode_text_style"
+        android:layout_marginTop="@dimen/dp_4"
+        android:text="@string/dehumid"
+        app:layout_constraintLeft_toLeftOf="@id/dlg_mode_dehumidification_icon"
+        app:layout_constraintRight_toRightOf="@id/dlg_mode_dehumidification_icon"
+        app:layout_constraintTop_toBottomOf="@id/dlg_mode_dehumidification_icon" />
+
+    <com.jmesh.appbase.ui.widget.JmeshDraweeView
+        android:id="@+id/dlg_mode_simple_blow_icon"
+        style="@style/choose_icon_style"
+        android:layout_marginTop="@dimen/dp_26"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/dlg_mode_simple_auto_icon"
+        app:layout_constraintTop_toBottomOf="@id/dlg_mode_refrigeration_text"
+        app:placeholderImage="@mipmap/icon_airconditioner_fan_pressed" />
+
+    <TextView
+        android:id="@+id/dlg_mode_simple_blow_text"
+        style="@style/choose_mode_text_style"
+        android:layout_marginTop="@dimen/dp_4"
+        android:text="@string/simple_blow"
+        app:layout_constraintLeft_toLeftOf="@id/dlg_mode_simple_blow_icon"
+        app:layout_constraintRight_toRightOf="@id/dlg_mode_simple_blow_icon"
+        app:layout_constraintTop_toBottomOf="@id/dlg_mode_simple_blow_icon" />
+
+    <com.jmesh.appbase.ui.widget.JmeshDraweeView
+        android:id="@+id/dlg_mode_simple_auto_icon"
+        style="@style/choose_icon_style"
+        app:layout_constraintBottom_toBottomOf="@id/dlg_mode_simple_blow_icon"
+        app:layout_constraintLeft_toRightOf="@id/dlg_mode_simple_blow_icon"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/dlg_mode_simple_blow_icon"
+        app:placeholderImage="@mipmap/icon_airconditioner_wind_strength_auto_pressed" />
+
+    <TextView
+        android:id="@+id/dlg_mode_simple_auto_text"
+        style="@style/choose_mode_text_style"
+        android:layout_marginTop="@dimen/dp_4"
+        android:text="@string/auto"
+        app:layout_constraintLeft_toLeftOf="@id/dlg_mode_simple_auto_icon"
+        app:layout_constraintRight_toRightOf="@id/dlg_mode_simple_auto_icon"
+        app:layout_constraintTop_toBottomOf="@id/dlg_mode_simple_auto_icon" />
+</android.support.constraint.ConstraintLayout>
