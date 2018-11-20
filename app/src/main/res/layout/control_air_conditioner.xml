@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="@id/control_air_conditioner_minus"
         app:slide_color="#84C7EE"
         app:stroke_color="#46628F"
-        app:stroke_wide="1px"
+        app:stroke_wide="1dp"
         app:switch_off_color="@color/transparent"
         app:switch_on_color="@color/black_50" />
 

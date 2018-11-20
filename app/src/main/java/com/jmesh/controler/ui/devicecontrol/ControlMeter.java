@@ -113,25 +113,13 @@ public class ControlMeter extends ControlBase implements View.OnClickListener, M
 
     List<GridDataContainer.Data> list = new ArrayList<>();
 
-    private MeterData meterData = new MeterData();
 
     @Override
     public void onDataCallback(TaskBase data) {
+        super.onDataCallback(data);
         byte[] resultData = data.getResultData();
         String resultStr = new String(resultData);
-        if (data instanceof TaskMeterMeterEnergyConsume) {
-            meterData.setEnergyConsume(new MeterBaseData("耗能", resultStr, "KWH"));
-        } else if (data instanceof TaskMeterMeterVolt) {
-            meterData.setVolt(new MeterBaseData("电压", resultStr, "V"));
-        } else if (data instanceof TaskMeterMeterCurrent) {
-            meterData.setCurrent(new MeterBaseData("电流", resultStr, "A"));
-        } else if (data instanceof TaskMeterMeterFrequency) {
-            meterData.setFrequency(new MeterBaseData("频率", resultStr, "HZ"));
-        } else if (data instanceof TaskMeterMeterPower) {
-            meterData.setPower(new MeterBaseData("功率", resultStr, "W"));
-        } else if (data instanceof TaskMeterMeterPowerFactor) {
-            meterData.setPowerFactor(new MeterBaseData("功率因数", resultStr, "W"));
-        } else if (data instanceof TaskMeterGetSwitchStatus) {
+        if (data instanceof TaskMeterGetSwitchStatus) {
             ToastUtils.showToast(resultStr);
         } else if (data instanceof TaskMeterSwitchOn) {
 
@@ -141,7 +129,8 @@ public class ControlMeter extends ControlBase implements View.OnClickListener, M
         refreshMeterData();
     }
 
-    private void refreshMeterData() {
+    @Override
+    protected void refreshMeterData() {
         if (meterData.getEnergyConsume() != null) {
             controlMeterFirstInfo.setText(meterData.getEnergyConsume().getName() + ":" + meterData.getEnergyConsume().getValue() + meterData.getEnergyConsume().getUnit());
         }

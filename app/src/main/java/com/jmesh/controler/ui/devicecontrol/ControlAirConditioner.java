@@ -90,18 +90,6 @@ public class ControlAirConditioner extends ControlBase implements View.OnClickLi
     }
 
 
-    private void refreshMeterData() {
-        if (meterData.getEnergyConsume() != null) {
-            controlHeadFirstInfo.setText(meterData.getEnergyConsume().getName() + ":" + meterData.getEnergyConsume().getValue() + meterData.getEnergyConsume().getUnit());
-        }
-        if (meterData.getVolt() != null) {
-            controlHeadSecondInfo.setText(meterData.getVolt().getName() + ":" + meterData.getVolt().getValue() + meterData.getVolt().getUnit());
-        }
-        if (meterData.getCurrent() != null) {
-            controlHeadThirdInfo.setText(meterData.getCurrent().getName() + ":" + meterData.getCurrent().getValue() + meterData.getCurrent().getUnit());
-        }
-    }
-
     private void initNavRightContent() {
         TextView textView = new TextView(getActivity());
         textView.setTextColor(getActivity().getResources().getColor(R.color.white));
@@ -524,21 +512,10 @@ public class ControlAirConditioner extends ControlBase implements View.OnClickLi
 
     @Override
     public void onDataCallback(TaskBase data) {
+        super.onDataCallback(data);
         byte[] resultData = data.getResultData();
         String resultStr = new String(resultData);
-        if (data instanceof TaskMeterMeterEnergyConsume) {
-            meterData.setEnergyConsume(new MeterBaseData("电量", resultStr, "KWH"));
-        } else if (data instanceof TaskMeterMeterVolt) {
-            meterData.setVolt(new MeterBaseData("电压", resultStr, "V"));
-        } else if (data instanceof TaskMeterMeterCurrent) {
-            meterData.setCurrent(new MeterBaseData("电流", resultStr, "A"));
-        } else if (data instanceof TaskMeterMeterFrequency) {
-            meterData.setFrequency(new MeterBaseData("频率", resultStr, "HZ"));
-        } else if (data instanceof TaskMeterMeterPower) {
-            meterData.setPower(new MeterBaseData("功率", resultStr, "W"));
-        } else if (data instanceof TaskMeterMeterPowerFactor) {
-            meterData.setPowerFactor(new MeterBaseData("功率因数", resultStr, "W"));
-        }  else if (data instanceof TaskAirConditioner) {
+        if (data instanceof TaskAirConditioner) {
             shake();
         } else if (data instanceof TaskMeterSwitchOn) {
             ToastUtils.showToast(resultStr);
@@ -558,4 +535,16 @@ public class ControlAirConditioner extends ControlBase implements View.OnClickLi
         refreshMeterData();
     }
 
+    @Override
+    protected void refreshMeterData() {
+        if (meterData.getEnergyConsume() != null) {
+            controlHeadFirstInfo.setText(meterData.getEnergyConsume().getName() + ":" + meterData.getEnergyConsume().getValue() + meterData.getEnergyConsume().getUnit());
+        }
+        if (meterData.getVolt() != null) {
+            controlHeadSecondInfo.setText(meterData.getVolt().getName() + ":" + meterData.getVolt().getValue() + meterData.getVolt().getUnit());
+        }
+        if (meterData.getCurrent() != null) {
+            controlHeadThirdInfo.setText(meterData.getCurrent().getName() + ":" + meterData.getCurrent().getValue() + meterData.getCurrent().getUnit());
+        }
+    }
 }

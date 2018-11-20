@@ -12,4 +12,16 @@ public class StringUtil {
         byte[] byteArray = str.getBytes();
         return byteArray;
     }
+
+    public static String reserve(int number, String data) {
+        try {
+            Float dataFloat = Float.parseFloat((String) data);
+            return String.format("%." + Integer.toString(number) + "f", dataFloat);
+        } catch (Throwable throwable) {
+
+        }
+        return data;
+    }
+
+
 }

@@ -146,21 +146,10 @@ public class ControlLight extends ControlBase implements MyToggleButton.SwitchLi
 
     @Override
     public void onDataCallback(TaskBase data) {
+        super.onDataCallback(data);
         byte[] resultData = data.getResultData();
         String resultStr = new String(resultData);
-        if (data instanceof TaskMeterMeterEnergyConsume) {
-            meterData.setEnergyConsume(new MeterBaseData("电量", resultStr, "KWH"));
-        } else if (data instanceof TaskMeterMeterVolt) {
-            meterData.setVolt(new MeterBaseData("电压", resultStr, "V"));
-        } else if (data instanceof TaskMeterMeterCurrent) {
-            meterData.setCurrent(new MeterBaseData("电流", resultStr, "A"));
-        } else if (data instanceof TaskMeterMeterFrequency) {
-            meterData.setFrequency(new MeterBaseData("频率", resultStr, "HZ"));
-        } else if (data instanceof TaskMeterMeterPower) {
-            meterData.setPower(new MeterBaseData("功率", resultStr, "W"));
-        } else if (data instanceof TaskMeterMeterPowerFactor) {
-            meterData.setPowerFactor(new MeterBaseData("功率因数", resultStr, "W"));
-        } else if (data instanceof TaskMeterSwitchOn) {
+        if (data instanceof TaskMeterSwitchOn) {
             ToastUtils.showToast(resultStr);
         } else if (data instanceof TaskMeterSwitchOff) {
             ToastUtils.showToast(resultStr);
@@ -170,7 +159,8 @@ public class ControlLight extends ControlBase implements MyToggleButton.SwitchLi
 
     private MeterData meterData = new MeterData();
 
-    private void refreshMeterData() {
+    @Override
+    protected void refreshMeterData() {
         if (meterData.getEnergyConsume() != null) {
             controlHeadFirstInfo.setText(meterData.getEnergyConsume().getName() + ":" + meterData.getEnergyConsume().getValue() + meterData.getEnergyConsume().getUnit());
         }
@@ -226,7 +216,7 @@ public class ControlLight extends ControlBase implements MyToggleButton.SwitchLi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.control_meter_top:
+            case R.id.control_light_head:
                 displayData();
                 break;
             case R.id.control_light_refresh_data:
