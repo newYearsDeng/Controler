@@ -41,8 +41,8 @@ public class MyToggleButton extends View implements View.OnClickListener {
     protected void onDraw(Canvas canvas) {
         drawbackground(canvas);
         drawSwitchText(canvas);
-        drawCircle(canvas);
         drawStroke(canvas);
+        drawCircle(canvas);
     }
 
 

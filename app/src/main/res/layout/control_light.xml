@@ -18,11 +18,11 @@
         app:layout_constraintTop_toBottomOf="@id/control_light_head"
         app:slide_color="#84C7EE"
         app:stroke_color="#46628F"
-        app:stroke_wide="1px"
-        app:switch_on_color="@color/black_50"
+        app:stroke_wide="1dp"
         app:switch_off_color="@color/transparent"
         app:switch_off_text="@string/control_switch_off"
         app:switch_off_text_color="#43628F"
+        app:switch_on_color="@color/black_50"
         app:switch_on_text="@string/control_switch_on"
         app:switch_on_text_color="#43628F"
         app:switch_text_size="16sp" />
