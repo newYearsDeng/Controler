@@ -30,6 +30,8 @@ import com.jmesh.controler.data.AirConditionerBrand;
 import com.jmesh.controler.data.AirConditionerData;
 import com.jmesh.controler.data.MeterBaseData;
 import com.jmesh.controler.data.MeterData;
+import com.jmesh.controler.data.dao.DBHelper;
+import com.jmesh.controler.data.dao.DeviceState;
 import com.jmesh.controler.task.TaskACAuthenticationSwitchOn;
 import com.jmesh.controler.task.TaskACSwitchOff;
 import com.jmesh.controler.task.TaskACSwitchOn;
@@ -73,6 +75,12 @@ public class ControlAirConditioner extends ControlBase implements View.OnClickLi
         assignViews();
         connecedDevice();
         ReadingTaskHandler.getInstance().setCallback(this);
+        ReadingTaskHandler.getInstance().clearAllTask();
+        DeviceState deviceState = DBHelper.getInstance().getDeviceState(meterCode);
+        if (deviceState != null) {
+            meterData.init(deviceState);
+            refreshMeterData();
+        }
         initEvent();
         initAirConditionerData();
         initNavRightContent();
@@ -126,8 +134,6 @@ public class ControlAirConditioner extends ControlBase implements View.OnClickLi
         controlHeadIcon.setVisibility(View.INVISIBLE);
 
     }
-
-    private MeterData meterData = new MeterData();
 
     private ConstraintLayout controlMeterTop;
     private JmeshDraweeView controlHeadIcon;
@@ -532,7 +538,7 @@ public class ControlAirConditioner extends ControlBase implements View.OnClickLi
         } else if (data instanceof TaskACSwitchOff) {
             ToastUtils.showToast(resultStr);
         }
-        refreshMeterData();
+        DBHelper.getInstance().addDeviceState(meterData.getDeviceState(meterCode));
     }
 
     @Override

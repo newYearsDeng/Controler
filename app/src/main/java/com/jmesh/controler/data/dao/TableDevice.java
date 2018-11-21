@@ -18,8 +18,15 @@ import java.util.Map;
 public class TableDevice extends TableBase {
     public static final String TABLE_NAME = "table_device";
 
+    public static void createTable(SQLiteDatabase database) {
+        createTable(database, TABLE_NAME, Device.getFieldMap());
+    }
+
+    public static void dropTable(SQLiteDatabase database) {
+        dropTable(TABLE_NAME, database);
+    }
+
     public static void addDevice(SQLiteDatabase db, Device device) {
-        createTable(db, TABLE_NAME, Device.getFieldMap());
         deleteDevice(db, device);
         db.insert(TABLE_NAME, null, device.parseToCV());
     }
@@ -31,12 +38,10 @@ public class TableDevice extends TableBase {
     }
 
     public static void deleteDevice(SQLiteDatabase database, String meterCode) {
-        createTable(database, TABLE_NAME, Device.getFieldMap());
         database.delete(TABLE_NAME, Device.kMeterCode + "=?", new String[]{meterCode});
     }
 
     public static List<Device> getAllDevice(SQLiteDatabase sqLiteDatabase) {
-        createTable(sqLiteDatabase, TABLE_NAME, Device.getFieldMap());
         String sql = queryAllSql(TABLE_NAME);
         Cursor cursor = sqLiteDatabase.rawQuery(sql, null, null);
         List<Device> deviceList = new ArrayList<>();

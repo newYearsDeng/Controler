@@ -12,6 +12,8 @@ import com.jmesh.controler.R;
 import com.jmesh.controler.base.ReadingTaskHandler;
 import com.jmesh.controler.data.MeterBaseData;
 import com.jmesh.controler.data.MeterData;
+import com.jmesh.controler.data.dao.DBHelper;
+import com.jmesh.controler.data.dao.DeviceState;
 import com.jmesh.controler.task.TaskBase;
 import com.jmesh.controler.task.TaskMeterGetSwitchStatus;
 import com.jmesh.controler.task.TaskMeterMeterCurrent;
@@ -22,6 +24,8 @@ import com.jmesh.controler.task.TaskMeterMeterPowerFactor;
 import com.jmesh.controler.task.TaskMeterMeterVolt;
 import com.jmesh.controler.task.TaskMeterSwitchOff;
 import com.jmesh.controler.task.TaskMeterSwitchOn;
+import com.jmesh.controler.task.TaskSocketSwitchOff;
+import com.jmesh.controler.task.TaskSocketSwitchOn;
 import com.jmesh.controler.ui.widget.DlgBaseData;
 import com.jmesh.controler.ui.widget.GridDataContainer;
 
@@ -47,6 +51,12 @@ public class ControlMeter extends ControlBase implements View.OnClickListener, M
         assignViews();
         connecedDevice();
         ReadingTaskHandler.getInstance().setCallback(this);
+        ReadingTaskHandler.getInstance().clearAllTask();
+        DeviceState deviceState = DBHelper.getInstance().getDeviceState(meterCode);
+        if (deviceState != null) {
+            meterData.init(deviceState);
+            refreshMeterData();
+        }
     }
 
     @Override
@@ -121,12 +131,13 @@ public class ControlMeter extends ControlBase implements View.OnClickListener, M
         String resultStr = new String(resultData);
         if (data instanceof TaskMeterGetSwitchStatus) {
             ToastUtils.showToast(resultStr);
-        } else if (data instanceof TaskMeterSwitchOn) {
-
-        } else if (data instanceof TaskMeterSwitchOff) {
-
+        } else if ((data instanceof TaskMeterSwitchOn) || (data instanceof TaskSocketSwitchOn)) {
+            meterData.setSwitchState(new MeterBaseData("跳合闸状态", "合闸", ""));
+        } else if ((data instanceof TaskMeterSwitchOff) || (data instanceof TaskSocketSwitchOff)) {
+            meterData.setSwitchState(new MeterBaseData("跳合闸状态", "跳闸", ""));
         }
         refreshMeterData();
+        DBHelper.getInstance().addDeviceState(meterData.getDeviceState(meterCode));
     }
 
     @Override
@@ -183,6 +194,9 @@ public class ControlMeter extends ControlBase implements View.OnClickListener, M
         }
         if (meterData.getPowerFactor() != null) {
             data.add(getDisplay(meterData.getPowerFactor()));
+        }
+        if (meterData.getSwitchState() != null) {
+            data.add(getDisplay(meterData.getSwitchState()));
         }
         return data;
     }

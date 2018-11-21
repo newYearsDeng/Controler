@@ -9,23 +9,24 @@ import android.text.TextUtils;
  */
 
 public class DBUtils {
+    public static String FLOAT = "FLOAT";
     public static String INTEGER = "INTEGER";//2个字节
     public static String INTEGER_PRIMARY_KEY = "INTERGER PRIMARY KEY";
     public static String TEXT = "TEXT";//
     public static String BIG_INTEGER = "BIGINT";
-    public static String INTEGER_PRIMARY_KEY_AUTOINCREMENT ="INTEGER PRIMARY KEY AUTOINCREMENT";
+    public static String INTEGER_PRIMARY_KEY_AUTOINCREMENT = "INTEGER PRIMARY KEY AUTOINCREMENT";
     public static String LONG = "LONG";//四个字节
 
 
-    public static String createColumn(String name,String type){
-        return name+" "+type;
+    public static String createColumn(String name, String type) {
+        return name + " " + type;
     }
 
-    public static String appendColumn(String... columns){
+    public static String appendColumn(String... columns) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("(");
         stringBuilder.append(columns[0]);
-        for(int index =1;index<columns.length;index++){
+        for (int index = 1; index < columns.length; index++) {
             stringBuilder.append(",");
             stringBuilder.append(columns[index]);
         }
@@ -34,8 +35,8 @@ public class DBUtils {
     }
 
 
-
     private static volatile DBUtils INSTANCE;
+
     public static DBUtils getInstance() {
         if (INSTANCE == null) {
             synchronized (DBUtils.class) {

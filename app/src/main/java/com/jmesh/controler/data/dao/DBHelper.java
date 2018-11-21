@@ -25,14 +25,14 @@ import java.util.List;
  */
 
 public class DBHelper extends SQLiteOpenHelper {
-    public static String DB_NAME = "control_0.db";
+    public static String DB_NAME = "control_2.db";
 
     public static final String TABLE_READ = "table_gatt_read";
     public static final String TABLE_WRITE = "table_gatt_write";
     public static final String TABLE_DEVICE = "table_device";
     public static final String TABLE_ROOM = "table_room";
 
-    public static final int DB_VERSION = 1;
+    public static final int DB_VERSION = 2;
     private static DBHelper gattDbHelper;
 
     public static DBHelper getInstance() {
@@ -52,12 +52,17 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        TableDevice.createTable(db);
+        TableDeviceState.createTable(db);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        TableDevice.dropTable(db);
+        TableDeviceState.dropTable(db);
+        TableDevice.createTable(db);
+        TableDeviceState.createTable(db);
     }
 
     public void addDevice(Device device) {
@@ -74,6 +79,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public List<Device> getAllDevice() {
         return TableDevice.getAllDevice(getReadableDatabase());
+    }
+
+    public DeviceState getDeviceState(String meterCode) {
+        return TableDeviceState.getDeviceState(getReadableDatabase(), meterCode);
+    }
+
+    public void addDeviceState(DeviceState deviceState) {
+        TableDeviceState.insertDeviceState(getReadableDatabase(), deviceState);
     }
 
 }

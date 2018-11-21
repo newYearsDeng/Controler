@@ -10,10 +10,10 @@
 
     <com.jmesh.appbase.ui.widget.JmeshDraweeView
         android:id="@+id/control_air_conditioner_minus"
-        android:layout_width="@dimen/dp_51"
-        android:layout_height="@dimen/dp_51"
+        android:layout_width="@dimen/x40"
+        android:layout_height="@dimen/x40"
         android:layout_marginLeft="@dimen/dp_49"
-        android:layout_marginTop="@dimen/dp_21"
+        android:layout_marginTop="@dimen/x25"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/control_air_conditioner_head"
         app:placeholderImage="@mipmap/icon_airconditioner_minus"
@@ -21,8 +21,8 @@
 
     <com.jmesh.appbase.ui.widget.MyToggleButton
         android:id="@+id/control_air_conditioner_switch"
-        android:layout_width="@dimen/dp_78"
-        android:layout_height="@dimen/dp_36"
+        android:layout_width="@dimen/x61"
+        android:layout_height="@dimen/x28"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/control_air_conditioner_minus"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -36,8 +36,8 @@
 
     <com.jmesh.appbase.ui.widget.JmeshDraweeView
         android:id="@+id/control_air_conditioner_plus"
-        android:layout_width="@dimen/dp_51"
-        android:layout_height="@dimen/dp_51"
+        android:layout_width="@dimen/x40"
+        android:layout_height="@dimen/x40"
         android:layout_marginRight="@dimen/dp_49"
         app:layout_constraintBottom_toBottomOf="@id/control_air_conditioner_minus"
         app:layout_constraintRight_toRightOf="parent"
@@ -49,7 +49,7 @@
         android:id="@+id/control_air_conditioner_power"
         style="@style/control_air_conditioner_style"
         android:layout_marginLeft="@dimen/dp_81"
-        android:layout_marginTop="@dimen/dp_39"
+        android:layout_marginTop="@dimen/x25"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/control_air_conditioner_switch" />
 
@@ -76,7 +76,7 @@
     <com.jmesh.appbase.ui.widget.JmeshDraweeView
         android:id="@+id/control_air_conditioner_mode"
         style="@style/control_air_conditioner_style"
-        android:layout_marginTop="@dimen/dp_29"
+        android:layout_marginTop="@dimen/x25"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/control_air_conditioner_wind_strength"
         app:layout_constraintTop_toBottomOf="@id/control_air_conditioner_power" />

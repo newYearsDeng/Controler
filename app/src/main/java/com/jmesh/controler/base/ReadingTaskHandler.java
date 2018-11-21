@@ -52,6 +52,7 @@ public class ReadingTaskHandler implements GattHandler.OnNotifyCallback {
 
     public void clearAllTask() {
         taskBaseList.clear();
+        GattHandler.getInstance().clearAllCmd();
     }
 
     private boolean hasNextTask() {
@@ -84,13 +85,11 @@ public class ReadingTaskHandler implements GattHandler.OnNotifyCallback {
         if (bleDevice == null) {
             return;
         }
-        int sendInstance = bleDevice.getInstanceIdByUuid(SEND_CHARACTERIST);
         GattHandler.getInstance().setOnNotifyCallback(this);
         if (!bleDevice.hasNotified(NOTIFY_CHARACTERIST)) {
             GattHandler.getInstance().setMtu(bleDevice.getKey(), 100);
             GattHandler.getInstance().enableNotifyByUUID(bleDevice.getKey(), NOTIFY_CHARACTERIST);
         }
-        GattHandler.getInstance().write(bleDevice.getKey(), sendInstance, data);
         GattHandler.getInstance().writeByUuid(bleDevice.getKey(), SEND_CHARACTERIST, data);
     }
 

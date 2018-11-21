@@ -16,8 +16,8 @@
     </style>
 
     <style name="control_air_conditioner_style">
-        <item name="android:layout_width">@dimen/dp_65</item>
-        <item name="android:layout_height">@dimen/dp_65</item>
+        <item name="android:layout_width">@dimen/x51</item>
+        <item name="android:layout_height">@dimen/x51</item>
     </style>
 
     <style name="choose_mode_text_style">

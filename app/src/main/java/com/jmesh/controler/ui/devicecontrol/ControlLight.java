@@ -13,6 +13,8 @@ import com.jmesh.controler.R;
 import com.jmesh.controler.base.ReadingTaskHandler;
 import com.jmesh.controler.data.MeterBaseData;
 import com.jmesh.controler.data.MeterData;
+import com.jmesh.controler.data.dao.DBHelper;
+import com.jmesh.controler.data.dao.DeviceState;
 import com.jmesh.controler.task.TaskBase;
 import com.jmesh.controler.task.TaskLightSwitchOff;
 import com.jmesh.controler.task.TaskLightSwitchOn;
@@ -48,6 +50,11 @@ public class ControlLight extends ControlBase implements MyToggleButton.SwitchLi
         connecedDevice();
         ReadingTaskHandler.getInstance().setCallback(this);
         ReadingTaskHandler.getInstance().clearAllTask();
+        DeviceState deviceState = DBHelper.getInstance().getDeviceState(meterCode);
+        if (deviceState != null) {
+            meterData.init(deviceState);
+            refreshMeterData();
+        }
     }
 
     @Override
@@ -150,14 +157,13 @@ public class ControlLight extends ControlBase implements MyToggleButton.SwitchLi
         byte[] resultData = data.getResultData();
         String resultStr = new String(resultData);
         if (data instanceof TaskMeterSwitchOn) {
-            ToastUtils.showToast(resultStr);
+            meterData.setSwitchState(new MeterBaseData("跳合闸状态", "合闸", ""));
         } else if (data instanceof TaskMeterSwitchOff) {
-            ToastUtils.showToast(resultStr);
+            meterData.setSwitchState(new MeterBaseData("跳合闸状态", "跳闸", ""));
         }
         refreshMeterData();
+        DBHelper.getInstance().addDeviceState(meterData.getDeviceState(meterCode));
     }
-
-    private MeterData meterData = new MeterData();
 
     @Override
     protected void refreshMeterData() {
@@ -200,6 +206,9 @@ public class ControlLight extends ControlBase implements MyToggleButton.SwitchLi
         }
         if (meterData.getPowerFactor() != null) {
             data.add(getDisplay(meterData.getPowerFactor()));
+        }
+        if (meterData.getSwitchState() != null) {
+            data.add(getDisplay(meterData.getSwitchState()));
         }
         return data;
     }

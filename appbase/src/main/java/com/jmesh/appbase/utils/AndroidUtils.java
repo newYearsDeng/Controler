@@ -69,29 +69,29 @@ public class AndroidUtils {
     }
 
     public static void createShortCut(Context context) {
-        if (isAddedShortCut(context)) {
-            return;
-        }
-        Intent shortcut = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
-        //shortcut的名字
-        shortcut.putExtra(Intent.EXTRA_SHORTCUT_NAME, context.getString(R.string.app_name));
-        //不允许重复添加
-        shortcut.putExtra("duplicate", false);
-        //设置shortcut的图标
-        Parcelable icon = Intent.ShortcutIconResource.fromContext(context, R.mipmap.ic_launcher_jmesh);
-        shortcut.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, icon);
-        //设置用来启动的intent
-        //如果用以下Intent会造成从快捷方式进入和从应用集合进入 会开启两遍SplashActivity的问题
-        //解决的关键在于添加Action_Main
-        //Intent intent = new Intent(this, SplashActivity.class);
-        ComponentName comp = new ComponentName(context.getPackageName(), "com.bcmeter.jmeshdriver.ui.WelcomeActivity");
-        Intent intent = new Intent(Intent.ACTION_MAIN).setComponent(comp);
-        intent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-        intent.addFlags(Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY);
-        intent.addCategory(Intent.CATEGORY_LAUNCHER);
-        shortcut.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent);
-        //发送广播让Launcher接收来创建shortcut
-        context.sendBroadcast(shortcut);
+//        if (isAddedShortCut(context)) {
+//            return;
+//        }
+//        Intent shortcut = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
+//        //shortcut的名字
+//        shortcut.putExtra(Intent.EXTRA_SHORTCUT_NAME, context.getString(R.string.app_name));
+//        //不允许重复添加
+//        shortcut.putExtra("duplicate", false);
+//        //设置shortcut的图标
+//        Parcelable icon = Intent.ShortcutIconResource.fromContext(context, R.mipmap.ic_launcher_jmesh);
+//        shortcut.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, icon);
+//        //设置用来启动的intent
+//        //如果用以下Intent会造成从快捷方式进入和从应用集合进入 会开启两遍SplashActivity的问题
+//        //解决的关键在于添加Action_Main
+//        //Intent intent = new Intent(this, SplashActivity.class);
+//        ComponentName comp = new ComponentName(context.getPackageName(), "com.bcmeter.jmeshdriver.ui.WelcomeActivity");
+//        Intent intent = new Intent(Intent.ACTION_MAIN).setComponent(comp);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY);
+//        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+//        shortcut.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent);
+//        //发送广播让Launcher接收来创建shortcut
+//        context.sendBroadcast(shortcut);
 
     }
 
