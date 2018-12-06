@@ -3,12 +3,16 @@ package com.jmesh.controler.ui.devicecontrol;
 import android.app.Activity;
 import android.bluetooth.BluetoothGatt;
 
+import com.jmesh.appbase.BaseApplication;
+import com.jmesh.appbase.base.HandlerUtil;
 import com.jmesh.appbase.base.ToastUtils;
+import com.jmesh.appbase.ui.widget.JmeshDraweeView;
 import com.jmesh.appbase.utils.StringUtil;
 import com.jmesh.blebase.base.BleManager;
 import com.jmesh.blebase.callback.BleGattCallback;
 import com.jmesh.blebase.exception.BleException;
 import com.jmesh.blebase.state.BleDevice;
+import com.jmesh.blebase.utils.JMeshLog;
 import com.jmesh.controler.R;
 import com.jmesh.controler.base.ReadingTaskHandler;
 import com.jmesh.controler.data.MeterBaseData;
@@ -27,6 +31,11 @@ import com.jmesh.controler.util.HexUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * Created by Administrator on 2018/11/5.
  */
@@ -41,6 +50,8 @@ public abstract class ControlBase implements ReadingTaskHandler.OnDataCallback {
         EventBus.getDefault().register(this);
     }
 
+    public static Set<String> connectingDeviceList = new HashSet<>();
+
     public abstract void onNavRightBnClicked();
 
     public boolean isDeviceConneced() {
@@ -51,9 +62,34 @@ public abstract class ControlBase implements ReadingTaskHandler.OnDataCallback {
         } else return false;
     }
 
+    BluetoothGatt bluetoothGatt;
+
+    public void cancelConnect() {
+        if (bluetoothGatt != null) {
+            bluetoothGatt.disconnect();
+        }
+    }
+
     public void connecedDevice() {
+        final BleDevice bleDevice = BleManager.getInstance().getConnectedDeviceByMac(mac);
+        if (bleDevice != null) {
+            if (callback != null) {
+                HandlerUtil.runOnUiThreadDelay(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.onConnectSuccess(bleDevice, null, 0);
+                    }
+                }, 500);
+                return;
+            }
+        }
         connecting = true;
-        BleManager.getInstance().connect(mac, callback);
+        if (connectingDeviceList.contains(mac)) {
+            return;
+        } else {
+            bluetoothGatt = BleManager.getInstance().connect(mac, callback, 5000/*ms*/);
+            connectingDeviceList.add(mac);
+        }
     }
 
     @Subscribe
@@ -66,6 +102,7 @@ public abstract class ControlBase implements ReadingTaskHandler.OnDataCallback {
                 onConnecting();
                 break;
             case EventConnectState.connectSuccess:
+                JMeshLog.e("onEvent", "connect_success");
                 onConnectedSuccess();
                 break;
             case EventConnectState.disconnected:
@@ -105,7 +142,7 @@ public abstract class ControlBase implements ReadingTaskHandler.OnDataCallback {
     }
 
     private void onDisConnected() {
-        ToastUtils.showToast(getActivity().getString(R.string.disconnect));
+
     }
 
     private void onConnecting() {
@@ -122,16 +159,20 @@ public abstract class ControlBase implements ReadingTaskHandler.OnDataCallback {
 
         @Override
         public void onConnectFail(BleDevice bleDevice, BleException e) {
+            connectingDeviceList.remove(bleDevice.getMac());
             EventBus.getDefault().post(new EventConnectState(EventConnectState.connectFailed));
         }
 
         @Override
         public void onConnectSuccess(BleDevice bleDevice, BluetoothGatt bluetoothGatt, int i) {
+            JMeshLog.e("callback", "onconnectSuccess");
+            connectingDeviceList.remove(bleDevice.getMac());
             EventBus.getDefault().post(new EventConnectState(EventConnectState.connectSuccess));
         }
 
         @Override
         public void onDisConnected(boolean b, BleDevice bleDevice, BluetoothGatt bluetoothGatt, int i) {
+            ToastUtils.showToast(BaseApplication.context.getString(R.string.disconnect));
             EventBus.getDefault().post(new EventConnectState(EventConnectState.disconnected));
         }
     };
@@ -208,6 +249,7 @@ public abstract class ControlBase implements ReadingTaskHandler.OnDataCallback {
     public void onDataCallback(TaskBase data) {
         byte[] resultData = data.getResultData();
         String resultStr = new String(resultData);
+        JMeshLog.e(resultStr);
         if (data instanceof TaskMeterMeterEnergyConsume) {
             meterData.setEnergyConsume(new MeterBaseData("耗能", StringUtil.reserve(2, resultStr), "KW·h"));
         } else if (data instanceof TaskMeterMeterVolt) {
@@ -217,7 +259,7 @@ public abstract class ControlBase implements ReadingTaskHandler.OnDataCallback {
         } else if (data instanceof TaskMeterMeterFrequency) {
             meterData.setFrequency(new MeterBaseData("频率", StringUtil.reserve(2, resultStr), "Hz"));
         } else if (data instanceof TaskMeterMeterPower) {
-            meterData.setPower(new MeterBaseData("功率", StringUtil.reserve(1, resultStr), "W"));
+            meterData.setPower(new MeterBaseData("功率", StringUtil.reserve(4, resultStr), "kw"));
         } else if (data instanceof TaskMeterMeterPowerFactor) {
             meterData.setPowerFactor(new MeterBaseData("功率因数", StringUtil.reserve(3, resultStr), ""));
         }

@@ -6,7 +6,7 @@ import com.jmesh.controler.data.AirConditionerData;
  * Created by Administrator on 2018/11/15.
  */
 
-public class HuaLing {
+public class HuaLing implements IAirConditioner {
 
     /**
      * 81 01 D3 01 88 01 1F 05   01 01 7C 0D 08 07     70 23 CB 26 01 00      20   03   06   2D   00 00 00 00     6B   关机 制冷 25度 高速方向90度
@@ -180,8 +180,8 @@ public class HuaLing {
         return hwm_1.toString();
     }
 
-
-    public static String getCode(AirConditionerData airConditionerData) {
+    @Override
+    public String getCode(AirConditionerData airConditionerData) {
 
         //制冷（100） 风速1 扫风关 超强 20度
 //        String zl = "开,制冷,25,三级,上下关,左右关";

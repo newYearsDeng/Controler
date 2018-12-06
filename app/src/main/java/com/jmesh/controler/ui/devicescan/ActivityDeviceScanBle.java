@@ -8,7 +8,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
 import com.jmesh.appbase.base.PermissionUtils;
+import com.jmesh.appbase.base.ToastUtils;
 import com.jmesh.appbase.ui.widget.MyToggleButton;
 import com.jmesh.blebase.base.BleManager;
 import com.jmesh.blebase.callback.BleScanCallback;
@@ -29,6 +31,7 @@ public class ActivityDeviceScanBle extends ControlerBaseActivity implements MyTo
         super.onCreate(bundle);
         setContentView(R.layout.activity_device_scan);
         init();
+        refreshDevice();
     }
 
     private void init() {
@@ -99,6 +102,7 @@ public class ActivityDeviceScanBle extends ControlerBaseActivity implements MyTo
 
 
     private void refreshDevice() {
+        BleManager.getInstance().disconnectAllDevice();
         BleManager.getInstance().clearBleDevice();
         adapterDeviceScan.clearData();
         BleManager.getInstance().scan(callback, 20000);

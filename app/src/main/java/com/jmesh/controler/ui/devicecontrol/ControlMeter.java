@@ -49,13 +49,14 @@ public class ControlMeter extends ControlBase implements View.OnClickListener, M
     @Override
     public void init() {
         assignViews();
-        connecedDevice();
         ReadingTaskHandler.getInstance().setCallback(this);
         ReadingTaskHandler.getInstance().clearAllTask();
+        connecedDevice();
         DeviceState deviceState = DBHelper.getInstance().getDeviceState(meterCode);
         if (deviceState != null) {
             meterData.init(deviceState);
             refreshMeterData();
+            initToggleButton(deviceState);
         }
     }
 
@@ -100,6 +101,8 @@ public class ControlMeter extends ControlBase implements View.OnClickListener, M
 
     @Override
     protected void deviceConnectSuccess() {
+        readingTaskHandler = ReadingTaskHandler.getInstance();
+        readingTaskHandler.setMac(mac);
         startReadData();
     }
 
@@ -109,9 +112,6 @@ public class ControlMeter extends ControlBase implements View.OnClickListener, M
         if (!isDeviceConneced()) {
             return;
         }
-        readingTaskHandler = ReadingTaskHandler.getInstance();
-        readingTaskHandler.setMac(mac);
-        readingTaskHandler.clearAllTask();
         readingTaskHandler.addTask(new TaskMeterMeterEnergyConsume(meterCode));
         readingTaskHandler.addTask(new TaskMeterMeterVolt(meterCode));
         readingTaskHandler.addTask(new TaskMeterMeterCurrent(meterCode));
@@ -130,7 +130,7 @@ public class ControlMeter extends ControlBase implements View.OnClickListener, M
         byte[] resultData = data.getResultData();
         String resultStr = new String(resultData);
         if (data instanceof TaskMeterGetSwitchStatus) {
-            ToastUtils.showToast(resultStr);
+
         } else if ((data instanceof TaskMeterSwitchOn) || (data instanceof TaskSocketSwitchOn)) {
             meterData.setSwitchState(new MeterBaseData("跳合闸状态", "合闸", ""));
         } else if ((data instanceof TaskMeterSwitchOff) || (data instanceof TaskSocketSwitchOff)) {
@@ -151,6 +151,15 @@ public class ControlMeter extends ControlBase implements View.OnClickListener, M
         if (meterData.getCurrent() != null) {
             controlMeterThirdInfo.setText(meterData.getCurrent().getName() + ":" + meterData.getCurrent().getValue() + meterData.getCurrent().getUnit());
         }
+    }
+
+    private void initToggleButton(DeviceState deviceState) {
+        if (deviceState.isSwitchState()) {
+            controlMeterSwitch.setInitState(true);
+        } else {
+            controlMeterSwitch.setInitState(false);
+        }
+
     }
 
 

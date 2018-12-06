@@ -5,7 +5,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
+import com.jmesh.appbase.base.ToastUtils;
 import com.jmesh.appbase.ui.widget.JmeshDraweeView;
 import com.jmesh.appbase.utils.Density;
 import com.jmesh.controler.R;
@@ -69,7 +71,20 @@ public class ActivityHome extends ControlerBaseActivity {
     }
 
     public boolean leftBnVisible() {
+
         return false;
+    }
+
+    long lastPresstime;
+
+    @Override
+    public void onBackPressed() {
+        if ((System.currentTimeMillis() - lastPresstime) < 3 * 1000) {
+            super.onBackPressed();
+            return;
+        }
+        lastPresstime = System.currentTimeMillis();
+        ToastUtils.showToast("再按一次返回键退出");
     }
 
 

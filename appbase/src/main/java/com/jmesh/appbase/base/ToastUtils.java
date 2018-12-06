@@ -9,8 +9,14 @@ import com.jmesh.appbase.BaseApplication;
  */
 
 public class ToastUtils {
+    public static Toast staticToast;
+
     public static void showToast(String toast) {
-        Toast.makeText(BaseApplication.context, toast, Toast.LENGTH_SHORT).show();
+        if (staticToast != null) {
+            staticToast.cancel();
+        }
+        staticToast = Toast.makeText(BaseApplication.context, toast, Toast.LENGTH_SHORT);
+        staticToast.show();
     }
 
     public static void showToast(String toastStr, int gravity) {

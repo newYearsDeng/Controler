@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.jmesh.appbase.ui.BaseActivity;
 import com.jmesh.blebase.base.BleManager;
 import com.jmesh.blebase.state.BleDevice;
+import com.jmesh.controler.base.ReadingTaskHandler;
 import com.jmesh.controler.data.BDBleDevice;
 import com.jmesh.controler.ui.ControlerBaseActivity;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by Administrator on 2018/11/5.
@@ -72,14 +74,11 @@ public class ActivityControlMain extends ControlerBaseActivity {
     public void onDestroy() {
         super.onDestroy();
         if (controler != null) {
+            EventBus.getDefault().unregister(controler);
             controler.setConnecting(false);
             controler.onDestroy();
+            ReadingTaskHandler.getInstance().clearAllTask();
         }
-        BleDevice bleDevice = BleManager.getInstance().getConnectedDeviceByMac(mac);
-        if (bleDevice != null) {
-            BleManager.getInstance().disconnect(bleDevice);
-        }
-
     }
 
 }

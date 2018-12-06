@@ -110,6 +110,7 @@ public class DlgChooseAirConditionerBrand extends DlgBase {
         this.airConditionerBrandList = airConditionerBrandList;
         removeBrand();
         addBrand();
+        refreshBrandView();
     }
 
     Set<FrameLayout> items = new HashSet<>();

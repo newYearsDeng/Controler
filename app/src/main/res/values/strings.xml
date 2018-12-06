@@ -37,4 +37,5 @@
     <string name="disconnect">断开连接了.</string>
     <string name="control_switch_on">合闸</string>
     <string name="control_switch_off">跳闸</string>
+    <string name="string_come_from">来自APP的String</string>
 </resources>

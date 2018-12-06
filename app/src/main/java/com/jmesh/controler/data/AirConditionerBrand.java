@@ -22,6 +22,12 @@ public class AirConditionerBrand {
         this.brandId = brandId;
     }
 
+    public AirConditionerBrand(String name, int brandId, boolean isSelected) {
+        this.name = name;
+        this.brandId = brandId;
+        this.selected = isSelected;
+    }
+
     public String getName() {
         return name;
     }

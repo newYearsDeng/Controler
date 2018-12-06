@@ -1,35 +1,28 @@
 package com.jmesh.controler.ui.devicecontrol;
 
-import android.app.WallpaperInfo;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
 import android.support.constraint.ConstraintLayout;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.facebook.drawee.view.SimpleDraweeView;
-import com.jmesh.appbase.base.ToastUtils;
 import com.jmesh.appbase.ui.widget.JmeshDraweeView;
 import com.jmesh.appbase.ui.widget.MyToggleButton;
-import com.jmesh.appbase.utils.Density;
-import com.jmesh.blebase.base.BleManager;
 import com.jmesh.blebase.utils.JMeshLog;
 import com.jmesh.controler.R;
 import com.jmesh.controler.airconditioner.GreeFrequency;
+import com.jmesh.controler.airconditioner.IAirConditioner;
+import com.jmesh.controler.airconditioner.Midea;
 import com.jmesh.controler.base.ReadingTaskHandler;
 import com.jmesh.controler.data.AirConditionerBrand;
 import com.jmesh.controler.data.AirConditionerData;
 import com.jmesh.controler.data.MeterBaseData;
-import com.jmesh.controler.data.MeterData;
 import com.jmesh.controler.data.dao.DBHelper;
 import com.jmesh.controler.data.dao.DeviceState;
 import com.jmesh.controler.task.TaskACAuthenticationSwitchOn;
@@ -47,14 +40,11 @@ import com.jmesh.controler.task.TaskMeterMeterPowerFactor;
 import com.jmesh.controler.task.TaskMeterMeterVolt;
 import com.jmesh.controler.task.TaskMeterSwitchOff;
 import com.jmesh.controler.task.TaskMeterSwitchOn;
-import com.jmesh.controler.task.TaskSocketSwitchOff;
-import com.jmesh.controler.task.TaskSocketSwitchOn;
 import com.jmesh.controler.ui.ControlerBaseActivity;
 import com.jmesh.controler.ui.widget.DlgBaseData;
 import com.jmesh.controler.ui.widget.DlgChooseAirConditionerBrand;
 import com.jmesh.controler.ui.widget.DlgChooseMode;
 import com.jmesh.controler.ui.widget.DlgChooseWindStrength;
-import com.jmesh.controler.util.HexUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,9 +63,9 @@ public class ControlAirConditioner extends ControlBase implements View.OnClickLi
     @Override
     public void init() {
         assignViews();
-        connecedDevice();
         ReadingTaskHandler.getInstance().setCallback(this);
         ReadingTaskHandler.getInstance().clearAllTask();
+        connecedDevice();
         DeviceState deviceState = DBHelper.getInstance().getDeviceState(meterCode);
         if (deviceState != null) {
             meterData.init(deviceState);
@@ -83,6 +73,7 @@ public class ControlAirConditioner extends ControlBase implements View.OnClickLi
         }
         initEvent();
         initAirConditionerData();
+        chooseAirconditionerBrand();
         initNavRightContent();
     }
 
@@ -159,25 +150,34 @@ public class ControlAirConditioner extends ControlBase implements View.OnClickLi
 
     @Override
     public void onNavRightBnClicked() {
+        chooseAirconditionerBrand();
+    }
+
+    private void chooseAirconditionerBrand() {
         DlgChooseAirConditionerBrand dlg = new DlgChooseAirConditionerBrand(getActivity());
         List<AirConditionerBrand> list = new ArrayList<>();
-        list.add(new AirConditionerBrand("格力", 0));
+        list.add(new AirConditionerBrand("格力", 0, true));
         list.add(new AirConditionerBrand("美的", 1));
         dlg.setAirConditionerBrandList(list);
         dlg.show();
         dlg.setCallback(new DlgChooseAirConditionerBrand.OnCheckCallback() {
             @Override
             public void onCheck(AirConditionerBrand airConditionerBrand) {
-                ToastUtils.showToast(airConditionerBrand.getName());
+                if (airConditionerBrand.getBrandId() == 1) {
+                    airConditioner = new Midea();
+                } else {
+                    airConditioner = new GreeFrequency();
+                }
             }
         });
     }
+
+    IAirConditioner airConditioner = new GreeFrequency();
 
     @Override
     protected void deviceConnectSuccess() {
         readingTaskHandler = ReadingTaskHandler.getInstance();
         readingTaskHandler.setMac(mac);
-        readingTaskHandler.clearAllTask();
         readingTaskHandler.setCallback(this);
         readData();
     }
@@ -237,7 +237,7 @@ public class ControlAirConditioner extends ControlBase implements View.OnClickLi
                 plusTemperture();
                 break;
             case R.id.control_air_conditioner_mode:
-                changeMode();
+                chooseMode();
                 break;
             case R.id.control_air_conditioner_vertical_scavenging:
                 changeVerticalScavenging();
@@ -278,7 +278,7 @@ public class ControlAirConditioner extends ControlBase implements View.OnClickLi
         commit();
     }
 
-    private void changeMode() {
+    private void chooseMode() {
         if (airConditionerData == null) {
             return;
         }
@@ -341,7 +341,7 @@ public class ControlAirConditioner extends ControlBase implements View.OnClickLi
             return;
         }
         refreshView();
-        byte[] code = GreeFrequency.getCode(airConditionerData).getBytes();
+        byte[] code = airConditioner.getCode(airConditionerData).getBytes();
         TaskAirConditioner taskAirConditioner = new TaskAirConditioner(meterCode);
         taskAirConditioner.setCode(code);
         readingTaskHandler.addTask(taskAirConditioner);
@@ -387,28 +387,28 @@ public class ControlAirConditioner extends ControlBase implements View.OnClickLi
 
     private void refreshPower(boolean enable) {
         if (enable) {
-            controlAirConditionerPower.setNativeDrawable(R.mipmap.icon_airconditioner_power_pressed);
-        } else {
             controlAirConditionerPower.setNativeDrawable(R.mipmap.icon_airconditioner_power_unpressed);
+        } else {
+            controlAirConditionerPower.setNativeDrawable(R.mipmap.icon_airconditioner_power_pressed);
         }
     }
 
     private void refreshMode(int mode) {
         switch (mode) {
             case AirConditionerData.modeAuto:
-                controlAirConditionerMode.setNativeDrawable(R.mipmap.icon_airconditioner_wind_strength_auto_pressed);
+                controlAirConditionerMode.setNativeDrawable(R.mipmap.icon_airconditioner_wind_strength_auto_unpressed);
                 break;
             case AirConditionerData.modeHumidification:
-                controlAirConditionerMode.setNativeDrawable(R.mipmap.icon_airconditioner_dehumidification_pressed);
+                controlAirConditionerMode.setNativeDrawable(R.mipmap.icon_airconditioner_dehumidification_unpressed);
                 break;
             case AirConditionerData.modeRefrigeration:
-                controlAirConditionerMode.setNativeDrawable(R.mipmap.icon_airconditioner_refrigeration_pressed);
+                controlAirConditionerMode.setNativeDrawable(R.mipmap.icon_airconditioner_refrigeration_unpressed);
                 break;
             case AirConditionerData.modeHeat:
-                controlAirConditionerMode.setNativeDrawable(R.mipmap.icon_airconditioner_heat_pressed);
+                controlAirConditionerMode.setNativeDrawable(R.mipmap.icon_airconditioner_heat_unpressed);
                 break;
             case AirConditionerData.modeSimpleBlow:
-                controlAirConditionerMode.setNativeDrawable(R.mipmap.icon_airconditioner_fan_pressed);
+                controlAirConditionerMode.setNativeDrawable(R.mipmap.icon_airconditioner_fan_unpressed);
                 break;
         }
     }
@@ -416,19 +416,19 @@ public class ControlAirConditioner extends ControlBase implements View.OnClickLi
     private void refreshWindStrength(int windStrength) {
         switch (windStrength) {
             case AirConditionerData.windStrengthAuto:
-                controlAirConditionerWindStrength.setNativeDrawable(R.mipmap.icon_airconditioner_wind_strength_auto_pressed);
+                controlAirConditionerWindStrength.setNativeDrawable(R.mipmap.icon_airconditioner_wind_strength_auto_unpressed);
                 break;
             case AirConditionerData.windStrengthLowLevel:
-                controlAirConditionerWindStrength.setNativeDrawable(R.mipmap.icon_airconditioner_wind_strength_low_pressed);
+                controlAirConditionerWindStrength.setNativeDrawable(R.mipmap.icon_airconditioner_wind_strength_low_unpressed);
                 break;
             case AirConditionerData.windStrengthMidLevel:
-                controlAirConditionerWindStrength.setNativeDrawable(R.mipmap.icon_airconditioner_wind_strength_mid_pressed);
+                controlAirConditionerWindStrength.setNativeDrawable(R.mipmap.icon_airconditioner_wind_strength_mid_unpressed);
                 break;
             case AirConditionerData.windStrengthHighLevel:
-                controlAirConditionerWindStrength.setNativeDrawable(R.mipmap.icon_airconditioner_wind_strength_high_pressed);
+                controlAirConditionerWindStrength.setNativeDrawable(R.mipmap.icon_airconditioner_wind_strength_high_unpressed);
                 break;
             default:
-                controlAirConditionerWindStrength.setNativeDrawable(R.mipmap.icon_airconditioner_wind_strength_auto_pressed);
+                controlAirConditionerWindStrength.setNativeDrawable(R.mipmap.icon_airconditioner_wind_strength_auto_unpressed);
                 break;
         }
     }
@@ -521,12 +521,13 @@ public class ControlAirConditioner extends ControlBase implements View.OnClickLi
         super.onDataCallback(data);
         byte[] resultData = data.getResultData();
         String resultStr = new String(resultData);
+        JMeshLog.e("callback_str", resultStr);
         if (data instanceof TaskAirConditioner) {
             shake();
         } else if (data instanceof TaskMeterSwitchOn) {
-            ToastUtils.showToast(resultStr);
+
         } else if (data instanceof TaskMeterSwitchOff) {
-            ToastUtils.showToast(resultStr);
+
         } else if (data instanceof TaskACAuthenticationSwitchOn) {
             TaskACSwitchOn taskACSwitchOn = new TaskACSwitchOn(meterCode, resultData);
             readingTaskHandler.addTask(taskACSwitchOn);
@@ -534,9 +535,9 @@ public class ControlAirConditioner extends ControlBase implements View.OnClickLi
             TaskACSwitchOff taskACSwitchOff = new TaskACSwitchOff(meterCode, resultData);
             readingTaskHandler.addTask(taskACSwitchOff);
         } else if (data instanceof TaskACSwitchOn) {
-            ToastUtils.showToast(resultStr);
+
         } else if (data instanceof TaskACSwitchOff) {
-            ToastUtils.showToast(resultStr);
+
         }
         DBHelper.getInstance().addDeviceState(meterData.getDeviceState(meterCode));
     }

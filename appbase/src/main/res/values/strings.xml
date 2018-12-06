@@ -8,4 +8,5 @@
     <string name="net_error_file_invalid">文件验证错误,可能被劫持</string>
     <string name="net_error_net_error">网络错误</string>
     <string name="net_error_net_un_connect">貌似您的手机没有连接网络</string>
+    <string name="string_come_from">来自base的string</string>
 </resources>

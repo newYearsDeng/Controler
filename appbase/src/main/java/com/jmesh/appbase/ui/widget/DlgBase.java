@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 
 import com.jmesh.appbase.R;
 import com.jmesh.appbase.base.HandlerUtil;
+import com.jmesh.appbase.base.ToastUtils;
 
 /**
  * Created by Administrator on 2018/7/16.
@@ -36,7 +37,6 @@ public abstract class DlgBase extends FrameLayout implements View.OnClickListene
     }
 
     View contentView;
-
 
 
     private void init() {

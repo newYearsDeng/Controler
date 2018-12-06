@@ -47,13 +47,14 @@ public class ControlLight extends ControlBase implements MyToggleButton.SwitchLi
     @Override
     public void init() {
         assignViews();
-        connecedDevice();
         ReadingTaskHandler.getInstance().setCallback(this);
         ReadingTaskHandler.getInstance().clearAllTask();
+        connecedDevice();
         DeviceState deviceState = DBHelper.getInstance().getDeviceState(meterCode);
         if (deviceState != null) {
             meterData.init(deviceState);
             refreshMeterData();
+            initToggleButton(deviceState);
         }
     }
 
@@ -105,7 +106,6 @@ public class ControlLight extends ControlBase implements MyToggleButton.SwitchLi
     protected void deviceConnectSuccess() {
         readingTaskHandler = ReadingTaskHandler.getInstance();
         readingTaskHandler.setMac(mac);
-        readingTaskHandler.clearAllTask();
         readingTaskHandler.setCallback(this);
         startReadData();
     }
@@ -176,6 +176,15 @@ public class ControlLight extends ControlBase implements MyToggleButton.SwitchLi
         if (meterData.getCurrent() != null) {
             controlHeadThirdInfo.setText(meterData.getCurrent().getName() + ":" + meterData.getCurrent().getValue() + meterData.getCurrent().getUnit());
         }
+    }
+
+    private void initToggleButton(DeviceState deviceState) {
+        if (deviceState.isSwitchState()) {
+            controlLightSwitch.setInitState(true);
+        } else {
+            controlLightSwitch.setInitState(false);
+        }
+
     }
 
     private void displayData() {

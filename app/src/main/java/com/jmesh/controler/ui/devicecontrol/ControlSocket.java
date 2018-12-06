@@ -16,7 +16,7 @@ public class ControlSocket extends ControlMeter {
             return;
         }
         readingTaskHandler.addTask(new TaskSocketSwitchOff(meterCode));
-        readingTaskHandler.addTask(new TaskMeterGetSwitchStatus(meterCode));
+//        readingTaskHandler.addTask(new TaskMeterGetSwitchStatus(meterCode));
     }
 
     @Override
@@ -46,6 +46,6 @@ public class ControlSocket extends ControlMeter {
             return;
         }
         readingTaskHandler.addTask(new TaskSocketSwitchOn(meterCode));
-        readingTaskHandler.addTask(new TaskMeterGetSwitchStatus(meterCode));
+//        readingTaskHandler.addTask(new TaskMeterGetSwitchStatus(meterCode));
     }
 }

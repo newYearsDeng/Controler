@@ -1,5 +1,6 @@
 package com.jmesh.controler.base;
 
+import com.jmesh.blebase.advertiser.BleAdvertiser;
 import com.jmesh.blebase.base.BleManager;
 import com.jmesh.blebase.bluetooth.GattHandler;
 import com.jmesh.blebase.state.BleDevice;
@@ -30,11 +31,11 @@ public class ReadingTaskHandler implements GattHandler.OnNotifyCallback {
         return readingTaskHandler;
     }
 
-    public static final String SEND_CHARACTERIST = "00002afe-0000-1000-8000-00805f9b34fb";
-    public static final String NOTIFY_CHARACTERIST = "00002aff-0000-1000-8000-00805f9b34fb";
+    public static final String SEND_CHARACTERIST = "00002afe00001000800000805f9b34fb";
+    public static final String NOTIFY_CHARACTERIST = "00002aff00001000800000805f9b34fb";
 
     private String macStr;
-    private TaskBase taskBase;
+    private TaskBase currentTask;
 
     public void setMac(String mac) {
         this.macStr = mac;
@@ -44,13 +45,28 @@ public class ReadingTaskHandler implements GattHandler.OnNotifyCallback {
     List<TaskBase> taskBaseList = new ArrayList<>();
 
     public void addTask(TaskBase taskBase) {
-        this.taskBaseList.add(taskBase);
+        JMeshLog.e("getTask", taskBase.getClass().getSimpleName());
+        if (taskBase == null) {
+            return;
+        }
+        for (TaskBase task : taskBaseList) {
+            if (task.getClass() == taskBase.getClass()) {//如果存在相同的任务，便不在执行
+                return;
+            }
+        }
+        JMeshLog.e("taskSize_now", taskBaseList.size() + "");
+        if (this.taskBaseList.size() > 1) {
+            this.taskBaseList.add(1, taskBase);
+        } else {
+            this.taskBaseList.add(taskBase);
+        }
         if (taskBaseList.size() <= 1) {
             start();
         }
     }
 
     public void clearAllTask() {
+        JMeshLog.e("clear");
         taskBaseList.clear();
         GattHandler.getInstance().clearAllCmd();
     }
@@ -76,7 +92,7 @@ public class ReadingTaskHandler implements GattHandler.OnNotifyCallback {
     }
 
     private void setTask(TaskBase task) {
-        this.taskBase = task;
+        this.currentTask = task;
     }
 
     private void send(byte[] data) {
@@ -89,6 +105,7 @@ public class ReadingTaskHandler implements GattHandler.OnNotifyCallback {
         if (!bleDevice.hasNotified(NOTIFY_CHARACTERIST)) {
             GattHandler.getInstance().setMtu(bleDevice.getKey(), 100);
             GattHandler.getInstance().enableNotifyByUUID(bleDevice.getKey(), NOTIFY_CHARACTERIST);
+            bleDevice.setNotifyAttInstance(NOTIFY_CHARACTERIST);
         }
         GattHandler.getInstance().writeByUuid(bleDevice.getKey(), SEND_CHARACTERIST, data);
     }
@@ -101,7 +118,7 @@ public class ReadingTaskHandler implements GattHandler.OnNotifyCallback {
     }
 
     private void handle() {
-        byte[] cmd = taskBase.getCmd();
+        byte[] cmd = currentTask.getCmd();
         byte[] hexCmd = HexUtils.hexStringToBytes(new String(cmd));
         send(hexCmd);
     }
@@ -109,11 +126,12 @@ public class ReadingTaskHandler implements GattHandler.OnNotifyCallback {
 
     @Override
     public void onNotifyCallback(int i, int i1, byte[] bytes, String uuid) {
-        byte[] resolvedData = taskBase.resolveData(bytes);
+        byte[] resolvedData = currentTask.resolveData(bytes);
         if (callback != null) {
-            taskBase.setResultData(resolvedData);
-            callback.onDataCallback(taskBase);
+            currentTask.setResultData(resolvedData);
+            callback.onDataCallback(currentTask);
         }
+        JMeshLog.e("taskSize", taskBaseList.size() + "");
         removeTask();
         start();
     }

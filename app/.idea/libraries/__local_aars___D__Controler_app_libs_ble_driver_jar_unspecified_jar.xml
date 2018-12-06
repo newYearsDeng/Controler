@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="__local_aars__:D.\Controler\app\libs\ble_driver.jar:unspecified@jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/ble_driver.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

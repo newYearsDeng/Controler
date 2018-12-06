@@ -52,7 +52,7 @@ int data_pack_cmd(INPUT_STRU *in, OUTPUT_STRU *out) {
         new_DI = DI7;
     } else if (DI[0] == 0xbc && DI[1] == 0x02 && DI[2] == 0x00 && DI[3] == 0x00) {
         new_DI = DI8;
-    }else {
+    } else {
         return -1;
     }
 
@@ -114,17 +114,9 @@ int data_result_cmd(INPUT_STRU *in, OUTPUT_STRU *out) {
     } else if (DI[0] == 0xbc && DI[1] == 0x02 && DI[2] == 0x00 && DI[3] == 0x00) {
         new_DI = DI8;
         decimal_len = -1;
-    }else {
+    } else {
         return -1;
     }
-    //   data_buf_len = BYTE_LEN;
-    data_buf_len = DLT645_frame[9] - 4;
-    memcpy(data_buf, DLT645_frame + 14, data_buf_len);
-    for (i = 0; i < data_buf_len; i++) {
-        data_buf[i] -= 0x33;
-        //       data_buf[i] = bcd_to_decimal(data_buf[i]);
-    }
-    //  reverse_array(data_buf,data_buf_len);
 
     err_code = find_param(in, PARA_METER_ADDR, meterAddr, &paramLen);
     if (err_code != 0) {
@@ -147,23 +139,20 @@ int data_result_cmd(INPUT_STRU *in, OUTPUT_STRU *out) {
         in->subSEQ++;
         data_pack_cmd(in, out);
     } else if (ret == DLT645_ERR_OK) {
-        DLT645_DataLen += dataOut.len;
-        {
-            if (decimal_len == -1) {
-                flag = data_buf[1] & 0x01;
-                sprintf(out->data, "%d", flag);
-            }
-            else if(decimal_len == -2)
-            {
-                flag = (data_buf[0] >> 4) & 0x01;
-                sprintf(out->data, "%d", flag);
-            }
-            else
-            {
-                out_data_to_string(data_buf, data_buf_len, decimal_len, out->data);
-            }
+        data_buf_len = DLT645frame.data[9] - 4;
+        memcpy(data_buf, DLT645frame.data + 14, data_buf_len);
+        for (i = 0; i < data_buf_len; i++) {
+            data_buf[i] -= 0x33;
+        }
+
+        if (decimal_len == -1) {
+            flag = data_buf[1] & 0x01;
+            sprintf(out->data, "%d", flag);
+        } else {
+            out_data_to_string(data_buf, data_buf_len, decimal_len, out->data);
         }
     }
+
 
     return ret;
 }
@@ -181,7 +170,7 @@ void out_data_to_string(unsigned char *data_buf, int byte_len, unsigned char len
         reverse_array(data_buf, byte_len);
         res_byte_len = hex2str(data_buf, byte_len, byte_len * 2, out_data);
     } else {
-        for (i; i < byte_len; i++) {
+        for (i = 0; i < byte_len; i++) {
             data_buf[i] = bcd_to_decimal(data_buf[i]);
         }
         reverse_data_frame_to_string(data_buf, field_value, decimal_len, byte_len, is_sign_bit);

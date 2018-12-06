@@ -5,7 +5,7 @@ import com.jmesh.controler.data.AirConditionerData;
 /**
  * 格力变频
  */
-public class GreeFrequency {
+public class  GreeFrequency implements IAirConditioner {
 
     private static String model;
     private static String Switch;
@@ -385,7 +385,8 @@ public class GreeFrequency {
         return hwm.toString();
     }
 
-    public static String getCode(AirConditionerData airConditionerData) {
+    @Override
+    public String getCode(AirConditionerData airConditionerData) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(airConditionerData.isPower() ? "开" : "关");
         stringBuilder.append(",");
