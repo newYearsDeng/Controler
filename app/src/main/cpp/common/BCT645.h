@@ -180,7 +180,7 @@ int BeiDian_Watermeter_Format(const unsigned char *data, unsigned short datasize
 int BCT645_Splitairconditioning_DataPack(unsigned char *addr, unsigned char sign, BCT645_FC_T FC,
                                          Data_t *before_des_info, unsigned char *DESkey,
                                          Data_t *frameOut);
-
+void getDI(unsigned char *DI, unsigned long DI_tmp);
 #ifdef __cplusplus
 }
 #endif

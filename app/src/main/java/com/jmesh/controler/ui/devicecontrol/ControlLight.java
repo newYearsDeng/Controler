@@ -156,9 +156,9 @@ public class ControlLight extends ControlBase implements MyToggleButton.SwitchLi
         super.onDataCallback(data);
         byte[] resultData = data.getResultData();
         String resultStr = new String(resultData);
-        if (data instanceof TaskMeterSwitchOn) {
+        if (data instanceof TaskLightSwitchOn) {
             meterData.setSwitchState(new MeterBaseData("跳合闸状态", "合闸", ""));
-        } else if (data instanceof TaskMeterSwitchOff) {
+        } else if (data instanceof TaskLightSwitchOff) {
             meterData.setSwitchState(new MeterBaseData("跳合闸状态", "跳闸", ""));
         }
         refreshMeterData();

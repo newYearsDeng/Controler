@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/control_four_light_top"
+            layout="@layout/control_head" />
+
+        <com.jmesh.appbase.ui.widget.MyToggleButton
+            android:id="@+id/control_four_light_switch"
+            android:layout_width="@dimen/dp_78"
+            android:layout_height="@dimen/dp_36"
+            android:layout_marginLeft="@dimen/dp_49"
+            android:layout_marginTop="@dimen/dp_19"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/control_four_light_top"
+            app:slide_color="#84C7EE"
+            app:stroke_color="#46628F"
+            app:stroke_wide="1dp"
+            app:switch_off_color="@color/transparent"
+            app:switch_on_color="@color/black_50" />
+
+        <TextView
+            android:id="@+id/control_four_light_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_49"
+            android:background="@drawable/bg_scan_refresh_button"
+            android:paddingBottom="@dimen/dp_7"
+            android:paddingLeft="@dimen/dp_18"
+            android:paddingRight="@dimen/dp_19"
+            android:paddingTop="@dimen/dp_7"
+            android:text="@string/refresh"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_17"
+            app:layout_constraintBottom_toBottomOf="@id/control_four_light_switch"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/control_four_light_switch" />
+
+        <View
+            android:layout_marginTop="@dimen/dp_18"
+            android:id="@+id/left_switch_division"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="@color/black"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/control_four_light_switch" />
+
+        <FrameLayout
+            android:id="@+id/left_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black_30"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/left_switch_division">
+
+            <TextView
+                android:id="@+id/left_switch_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|left"
+                android:layout_marginBottom="@dimen/dp_13"
+                android:layout_marginLeft="@dimen/dp_26"
+                android:layout_marginTop="@dimen/dp_13"
+                android:text="@string/left_switch"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dp_15" />
+
+            <com.jmesh.appbase.ui.widget.MyToggleButton
+                android:id="@+id/left_switch_button"
+                android:layout_width="@dimen/dp_78"
+                android:layout_height="@dimen/dp_36"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginRight="@dimen/dp_19"
+                app:slide_color="#84C7EE"
+                app:stroke_color="#46628F"
+                app:stroke_wide="1dp"
+                app:switch_off_color="@color/transparent"
+                app:switch_on_color="@color/black_50" />
+        </FrameLayout>
+
+        <View
+            android:id="@+id/right_switch_division"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="@color/black"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/left_switch" />
+
+        <FrameLayout
+            android:id="@+id/right_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black_30"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/right_switch_division">
+
+            <TextView
+                android:id="@+id/right_switch_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|left"
+                android:layout_marginBottom="@dimen/dp_13"
+                android:layout_marginLeft="@dimen/dp_26"
+                android:layout_marginTop="@dimen/dp_13"
+                android:text="@string/right_switch"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dp_15" />
+
+            <com.jmesh.appbase.ui.widget.MyToggleButton
+                android:id="@+id/right_switch_button"
+                android:layout_width="@dimen/dp_78"
+                android:layout_height="@dimen/dp_36"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginRight="@dimen/dp_19"
+                app:slide_color="#84C7EE"
+                app:stroke_color="#46628F"
+                app:stroke_wide="1dp"
+                app:switch_off_color="@color/transparent"
+                app:switch_on_color="@color/black_50" />
+        </FrameLayout>
+
+        <View
+            android:id="@+id/top_switch_division"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="@color/black"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/right_switch" />
+
+        <FrameLayout
+            android:id="@+id/top_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black_30"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/top_switch_division">
+
+            <TextView
+                android:id="@+id/top_switch_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|left"
+                android:layout_marginBottom="@dimen/dp_13"
+                android:layout_marginLeft="@dimen/dp_26"
+                android:layout_marginTop="@dimen/dp_13"
+                android:text="@string/top_switch"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dp_15" />
+
+            <com.jmesh.appbase.ui.widget.MyToggleButton
+                android:id="@+id/top_switch_button"
+                android:layout_width="@dimen/dp_78"
+                android:layout_height="@dimen/dp_36"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginRight="@dimen/dp_19"
+                app:slide_color="#84C7EE"
+                app:stroke_color="#46628F"
+                app:stroke_wide="1dp"
+                app:switch_off_color="@color/transparent"
+                app:switch_on_color="@color/black_50" />
+        </FrameLayout>
+
+        <View
+            android:id="@+id/bottom_switch_division"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="@color/black"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/top_switch" />
+
+        <FrameLayout
+            android:id="@+id/bottom_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black_30"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bottom_switch_division">
+
+            <TextView
+                android:id="@+id/bottom_switch_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|left"
+                android:layout_marginBottom="@dimen/dp_13"
+                android:layout_marginLeft="@dimen/dp_26"
+                android:layout_marginTop="@dimen/dp_13"
+                android:text="@string/bottom_switch"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dp_15" />
+
+            <com.jmesh.appbase.ui.widget.MyToggleButton
+                android:id="@+id/bottom_switch_button"
+                android:layout_width="@dimen/dp_78"
+                android:layout_height="@dimen/dp_36"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginRight="@dimen/dp_19"
+                app:slide_color="#84C7EE"
+                app:stroke_color="#46628F"
+                app:stroke_wide="1dp"
+                app:switch_off_color="@color/transparent"
+                app:switch_on_color="@color/black_50" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="@color/black"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bottom_switch" />
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

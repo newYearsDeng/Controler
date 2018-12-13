@@ -87,6 +87,20 @@ public class DlgChooseMode extends DlgBase {
         }
     }
 
+    public void disableAuto() {
+        dlgModeSimpleAutoIcon.setVisibility(GONE);
+        dlgModeSimpleAutoText.setVisibility(GONE);
+    }
+
+    public void disableHumidification() {
+        dlgModeDehumidificationIcon.setVisibility(GONE);
+        dlgModeDehumidificationText.setVisibility(GONE);
+    }
+
+    public void disableBlow() {
+        dlgModeSimpleBlowIcon.setVisibility(GONE);
+        dlgModeSimpleBlowText.setVisibility(GONE);
+    }
 
     private JmeshDraweeView dlgModeRefrigerationIcon;
     private TextView dlgModeRefrigerationText;

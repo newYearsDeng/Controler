@@ -3,6 +3,8 @@ package com.jmesh.controler.data;
 import com.jmesh.controler.R;
 import com.jmesh.controler.ui.devicecontrol.ControlAirConditioner;
 import com.jmesh.controler.ui.devicecontrol.ControlBase;
+import com.jmesh.controler.ui.devicecontrol.ControlCenterAirConditioner;
+import com.jmesh.controler.ui.devicecontrol.ControlFourLight;
 import com.jmesh.controler.ui.devicecontrol.ControlLight;
 import com.jmesh.controler.ui.devicecontrol.ControlMeter;
 import com.jmesh.controler.ui.devicecontrol.ControlSocket;
@@ -19,6 +21,8 @@ public class BDBleDevice {
     public static final int TYPE_BD_GUIDEWAY__METER = 4;
     public static final int TYPE_BD_LIGHT = 5;
     public static final int TYPE_BD_WATER_METER = 6;
+    public static final int TYPE_BD_CENTER_AIRCONDITIONER = 7;
+    public static final int TYPE_BD_FOUR_LIGHT = 8;
 
     public static final String DI_ENERGY_CONSUM = "00000000";//电量
     public static final String DI_VOLTAGE = "02010100";//电压
@@ -44,6 +48,10 @@ public class BDBleDevice {
                 return "灯控";
             case TYPE_BD_WATER_METER:
                 return "水表";
+            case TYPE_BD_CENTER_AIRCONDITIONER:
+                return "中央空调";
+            case TYPE_BD_FOUR_LIGHT:
+                return "四路灯控";
         }
         return "未知设备";
     }
@@ -64,6 +72,10 @@ public class BDBleDevice {
                 return "icon_device_bd_light_grey";
             case TYPE_BD_WATER_METER:
                 return "icon_device_bd_water_meter_grey";
+            case TYPE_BD_CENTER_AIRCONDITIONER:
+                return "icon_device_bd_water_air_conditioner_grey";
+            case TYPE_BD_FOUR_LIGHT:
+                return "icon_device_bd_light_grey";
         }
         return "icon_device_bd_energy_meter_grey";
     }
@@ -84,6 +96,10 @@ public class BDBleDevice {
                 return "icon_device_bd_light_big";
             case TYPE_BD_WATER_METER:
                 return "icon_device_bd_water_meter_big";
+            case TYPE_BD_CENTER_AIRCONDITIONER:
+                return "icon_device_bd_water_air_conditioner_big";
+            case TYPE_BD_FOUR_LIGHT:
+                return "icon_device_bd_for_light_big";
         }
         return "icon_device_bd_energy_meter_big";
     }
@@ -104,6 +120,10 @@ public class BDBleDevice {
                 return R.layout.control_light;
             case TYPE_BD_WATER_METER:
                 return 0;
+            case TYPE_BD_CENTER_AIRCONDITIONER:
+                return R.layout.control_air_conditioner;
+            case TYPE_BD_FOUR_LIGHT:
+                return R.layout.control_four_light;
         }
         return 0;
     }
@@ -124,6 +144,10 @@ public class BDBleDevice {
                 return new ControlLight();
             case TYPE_BD_WATER_METER:
                 return null;
+            case TYPE_BD_FOUR_LIGHT:
+                return new ControlFourLight();
+            case TYPE_BD_CENTER_AIRCONDITIONER:
+                return new ControlCenterAirConditioner();
         }
         return null;
     }

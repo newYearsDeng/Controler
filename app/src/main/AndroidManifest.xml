@@ -36,6 +36,9 @@
         <activity
             android:name=".ui.devicecontrol.ActivityControlMain"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ActivityQRCodeScan"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

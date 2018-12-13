@@ -476,7 +476,7 @@ int BCT645_AllDataParse(unsigned char *addr, BCT645_FC_T FC, unsigned char *DI, 
 
     if (DI != NULL) {
         for (i = 0; i < DI_len; i++) {
-            if ((frame->data[13 - (4 - DI_len) - i] - 0x33) != DI[i]) {
+            if ((unsigned char)(frame->data[13 - (4 - DI_len) - i] - 0x33) != DI[i]) {
                 return DLT645_ERR_DI;
             }
         }
@@ -678,4 +678,11 @@ int BCT645_Splitairconditioning_DataPack(unsigned char *addr, unsigned char sign
     info.data.data = packInfoBuff;
     info.data.len = packInfoLen;
     return BCT645_FramePack(&info, frameOut);
+}
+
+void getDI(unsigned char *DI, unsigned long DI_tmp) {
+    DI[0] = (unsigned char) (DI_tmp >> 24);
+    DI[1] = (unsigned char) (DI_tmp >> 16);
+    DI[2] = (unsigned char) (DI_tmp >> 8);
+    DI[3] = (unsigned char) (DI_tmp);
 }

@@ -37,6 +37,22 @@ add_library( # Sets the name of the library.
              src/main/cpp/airswitch/dll.h
              src/main/cpp/airswitch/ftkt_tz_and_hz.c
              src/main/cpp/airswitch/air_conditioner_switch_connect.c
+
+             src/main/cpp/fourlight/getdll.h
+             src/main/cpp/fourlight/set/setdll.h
+             src/main/cpp/fourlight/four_light_connect.c
+             src/main/cpp/fourlight/getSiLuDengKong.c
+             src/main/cpp/fourlight/set/setSiLuDengKong.c
+             src/main/cpp/fourlight/set/four_light_connect_set.c
+
+             src/main/cpp/centerairconditioner/read/dll.h
+             src/main/cpp/centerairconditioner/read/getZhongYangKongTiao.c
+             src/main/cpp/centerairconditioner/read/read_connect.c
+
+             src/main/cpp/centerairconditioner/set/dll.h
+             src/main/cpp/centerairconditioner/set/setZhongYangKongTiao.c
+             src/main/cpp/centerairconditioner/set/set_connect.c
+
            )
 
 

@@ -16,7 +16,7 @@ import com.jmesh.blebase.utils.JMeshLog;
  */
 
 public class DrawText extends View {
-    String text = "dg将军四";
+    String text = "";
     private Paint mPaint;
     private Rect bounds;
     private int drawX = 100;

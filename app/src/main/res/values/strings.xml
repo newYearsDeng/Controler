@@ -38,4 +38,10 @@
     <string name="control_switch_on">合闸</string>
     <string name="control_switch_off">跳闸</string>
     <string name="string_come_from">来自APP的String</string>
+    <string name="left_switch">左开关</string>
+    <string name="right_switch">右开关</string>
+    <string name="top_switch">上开关</string>
+    <string name="bottom_switch">下开关</string>
+    <string name="four_light">四路灯控</string>
+    <string name="center_airconditioner">中央空调</string>
 </resources>

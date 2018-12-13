@@ -88,6 +88,7 @@ public class ReadingTaskHandler implements GattHandler.OnNotifyCallback {
     private void removeTask() {
         if (taskBaseList.size() > 0) {
             taskBaseList.remove(0);
+            currentTask = null;
         }
     }
 
@@ -126,6 +127,10 @@ public class ReadingTaskHandler implements GattHandler.OnNotifyCallback {
 
     @Override
     public void onNotifyCallback(int i, int i1, byte[] bytes, String uuid) {
+        if (currentTask == null) {
+            start();
+            return;
+        }
         byte[] resolvedData = currentTask.resolveData(bytes);
         if (callback != null) {
             currentTask.setResultData(resolvedData);
