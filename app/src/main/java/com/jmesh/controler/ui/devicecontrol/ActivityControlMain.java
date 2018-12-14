@@ -95,6 +95,10 @@ public class ActivityControlMain extends ControlerBaseActivity {
 
     private void initControl(boolean hasMac) {
         controler = BDBleDevice.getControl(type);
+        if (controler == null) {
+            ToastUtils.showToast("未知设备！");
+            finish();
+        }
         controler.setActivity(this);
         controler.setContentView();
         controler.setType(type);

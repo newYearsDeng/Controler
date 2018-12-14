@@ -263,9 +263,10 @@ public class ControlCenterAirConditioner extends ControlBase implements View.OnC
         if (airConditionerData == null) {
             return;
         }
-        airConditionerData.setPower(!airConditionerData.isPower());
-        TaskBase taskBase = new TaskCenterAirconditionerSetPower(meterCode, airConditionerData.isPower());
+        JMeshLog.e("现在的状态", airConditionerData.isPower() ? "关" : "开");
+        TaskBase taskBase = new TaskCenterAirconditionerSetPower(meterCode, !airConditionerData.isPower());
         ReadingTaskHandler.getInstance().addTask(taskBase);
+        airConditionerData.setPower(!airConditionerData.isPower());
         refreshView();
     }
 
@@ -331,9 +332,9 @@ public class ControlCenterAirConditioner extends ControlBase implements View.OnC
 
     private void refreshPower(boolean enable) {
         if (enable) {
-            controlAirConditionerPower.setNativeDrawable(R.mipmap.icon_airconditioner_power_unpressed);
-        } else {
             controlAirConditionerPower.setNativeDrawable(R.mipmap.icon_airconditioner_power_pressed);
+        } else {
+            controlAirConditionerPower.setNativeDrawable(R.mipmap.icon_airconditioner_power_unpressed);
         }
     }
 
