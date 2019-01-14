@@ -104,30 +104,6 @@ public class BDBleDevice {
         return "icon_device_bd_energy_meter_big";
     }
 
-    public static int getResId(int type) {
-        switch (type) {
-            case TYPE_BD_ENERGY_METER:
-                return R.layout.control_meter_x;
-            case TYPE_BD_WALL_SOCKET:
-                return R.layout.control_meter_x;
-            case TYPE_BD_MOBILE_SOCKET:
-                return R.layout.control_meter_x;
-            case TYPE_BD_AIR_CONDITIONER:
-                return R.layout.control_air_conditioner;
-            case TYPE_BD_GUIDEWAY__METER:
-                return R.layout.control_meter_x;
-            case TYPE_BD_LIGHT:
-                return R.layout.control_light;
-            case TYPE_BD_WATER_METER:
-                return 0;
-            case TYPE_BD_CENTER_AIRCONDITIONER:
-                return R.layout.control_air_conditioner;
-            case TYPE_BD_FOUR_LIGHT:
-                return R.layout.control_four_light;
-        }
-        return 0;
-    }
-
     public static ControlBase getControl(int type) {
         switch (type) {
             case TYPE_BD_ENERGY_METER:

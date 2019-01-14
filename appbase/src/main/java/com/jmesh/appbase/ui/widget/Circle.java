@@ -1,8 +1,8 @@
 package com.jmesh.appbase.ui.widget;
-
 /**
  * Created by Administrator on 2018/7/9.
  */
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,14 +10,12 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
-/**
- * Created by virl on 15/7/16.
- */
 public class Circle extends View {
     public Circle(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }
+
     public Circle(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
@@ -29,9 +27,10 @@ public class Circle extends View {
     }
 
     private Paint paint;
+
     private void init(Context context, AttributeSet attrs) {
         paint = new Paint();
-        if(attrs==null) {
+        if (attrs == null) {
             return;
         }
         int color = Color.parseColor("#ffff0000");

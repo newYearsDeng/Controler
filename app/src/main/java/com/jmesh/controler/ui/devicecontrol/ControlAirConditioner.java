@@ -359,7 +359,7 @@ public class ControlAirConditioner extends ControlBase implements View.OnClickLi
 
     private void initAirConditionerData() {
         airConditionerData = new AirConditionerData();
-        airConditionerData.setPower(true);
+        airConditionerData.setPower(false);
         airConditionerData.setMode(AirConditionerData.modeRefrigeration);
         airConditionerData.setTemperture(20);
         airConditionerData.setVerticalScavenging(true);

@@ -18,13 +18,27 @@ android {
             moduleName "btcontrol-lib"
         }
     }
+
+    signingConfigs {
+        jmeshcontrol {
+            keyAlias 'Controler'
+            keyPassword 'jmeshcontrol888'
+            storeFile file('jmeshcontrol.jks')
+            storePassword 'jmeshcontrol888'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        debug {
+            signingConfig signingConfigs.jmeshcontrol
             jniDebuggable false
+            debuggable false
+        }
+
+        debug {
+            jniDebuggable true
             debuggable true
         }
     }
