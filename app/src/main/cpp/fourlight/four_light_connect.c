@@ -2,7 +2,7 @@
 #include "getdll.h"
 #include <string.h>
 
-JNIEXPORT int JNICALL Java_com_jmesh_controler_jni_FourLightConnector_getLightSwitchStateCmd(
+JNIEXPORT int JNICALL Java_com_jmesh_lib645_jni_FourLightConnector_getLightSwitchStateCmd(
         JNIEnv *env,
         jobject jo, jbyteArray meterCode,
         jbyteArray dataResult) {
@@ -30,7 +30,7 @@ JNIEXPORT int JNICALL Java_com_jmesh_controler_jni_FourLightConnector_getLightSw
     return strlen(output_stru.frame);
 }
 
-JNIEXPORT int JNICALL Java_com_jmesh_controler_jni_FourLightConnector_resolveLightSwitchStateResult(
+JNIEXPORT int JNICALL Java_com_jmesh_lib645_jni_FourLightConnector_resolveLightSwitchStateResult(
         JNIEnv *env,
         jobject jo, jbyteArray meterCode, jbyteArray dataSrc,
         jbyteArray dataResult) {

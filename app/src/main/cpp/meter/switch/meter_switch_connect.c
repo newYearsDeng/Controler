@@ -2,7 +2,7 @@
 #include "dll.h"
 #include <string.h>
 
-JNIEXPORT int JNICALL Java_com_jmesh_controler_jni_MeterJniConnecter_getMeterSwitchCmd(
+JNIEXPORT int JNICALL Java_com_jmesh_lib645_jni_MeterJniConnecter_getMeterSwitchCmd(
         JNIEnv *env,
         jobject jo, jbyteArray meterCode, jbyteArray dataSrc,
         jbyteArray dataResult) {
@@ -38,7 +38,7 @@ JNIEXPORT int JNICALL Java_com_jmesh_controler_jni_MeterJniConnecter_getMeterSwi
 }
 
 
-JNIEXPORT int JNICALL Java_com_jmesh_controler_jni_MeterJniConnecter_resolveMeterSwitchCmd(
+JNIEXPORT int JNICALL Java_com_jmesh_lib645_jni_MeterJniConnecter_resolveMeterSwitchCmd(
         JNIEnv *env,
         jobject jo, jbyteArray meterCode, jbyteArray dataSrc,
         jbyteArray dataResult) {

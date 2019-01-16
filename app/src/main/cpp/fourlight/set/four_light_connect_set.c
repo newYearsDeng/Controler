@@ -3,7 +3,7 @@
 #include <string.h>
 
 
-JNIEXPORT int JNICALL Java_com_jmesh_controler_jni_FourLightConnector_setLightStateEnable(
+JNIEXPORT int JNICALL Java_com_jmesh_lib645_jni_FourLightConnector_setLightStateEnable(
         JNIEnv *env,
         jobject jo, jbyteArray meterCode, jbyteArray dataSrc,
         jbyteArray dataResult) {
@@ -37,7 +37,7 @@ JNIEXPORT int JNICALL Java_com_jmesh_controler_jni_FourLightConnector_setLightSt
     return strlen(output_stru.frame);
 }
 
-JNIEXPORT int JNICALL Java_com_jmesh_controler_jni_FourLightConnector_setLightStatedisable(
+JNIEXPORT int JNICALL Java_com_jmesh_lib645_jni_FourLightConnector_setLightStatedisable(
         JNIEnv *env,
         jobject jo, jbyteArray meterCode, jbyteArray dataSrc,
         jbyteArray dataResult) {

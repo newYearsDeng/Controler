@@ -1,7 +1,7 @@
 #include "jni.h"
 #include "dll.h"
 #include <string.h>
-JNIEXPORT int JNICALL Java_com_jmesh_controler_jni_MeterJniConnecter_transCmd(
+JNIEXPORT int JNICALL Java_com_jmesh_lib645_jni_MeterJniConnecter_transCmd(
         JNIEnv *env,
         jobject jo, jbyteArray meterCode, jbyteArray di, jbyteArray dataResult) {
 
@@ -31,7 +31,7 @@ JNIEXPORT int JNICALL Java_com_jmesh_controler_jni_MeterJniConnecter_transCmd(
     return output_stru.frame_len;
 }
 
-JNIEXPORT int JNICALL Java_com_jmesh_controler_jni_MeterJniConnecter_dataPack(
+JNIEXPORT int JNICALL Java_com_jmesh_lib645_jni_MeterJniConnecter_dataPack(
         JNIEnv *env,
         jobject jo, jbyteArray meterCode, jbyteArray dataSrc, jbyteArray di,
         jbyteArray dataResult) {
@@ -70,7 +70,7 @@ JNIEXPORT int JNICALL Java_com_jmesh_controler_jni_MeterJniConnecter_dataPack(
 }
 
 
-JNIEXPORT int JNICALL Java_com_jmesh_controler_jni_MeterJniConnecter_dataResult(
+JNIEXPORT int JNICALL Java_com_jmesh_lib645_jni_MeterJniConnecter_dataResult(
         JNIEnv *env,
         jobject jo, jbyteArray meterCode, jbyteArray dataSrc, jbyteArray di,
         jbyteArray dataResult) {

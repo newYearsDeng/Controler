@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import com.jmesh.appbase.ui.widget.DlgBase;
 import com.jmesh.appbase.ui.widget.JmeshDraweeView;
+import com.jmesh.lib645.AirConditionerData;
 import com.jmesh.controler.R;
-import com.jmesh.controler.data.AirConditionerData;
 
 /**
  * Created by Administrator on 2018/11/13.

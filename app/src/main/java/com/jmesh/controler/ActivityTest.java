@@ -15,7 +15,7 @@ import com.jmesh.blebase.callback.BleGattCallback;
 import com.jmesh.blebase.exception.BleException;
 import com.jmesh.blebase.state.BleDevice;
 import com.jmesh.blebase.utils.JMeshLog;
-import com.jmesh.controler.util.HexUtils;
+import com.jmesh.lib645.util.HexUtils;
 
 /**
  * Created by Administrator on 2018/11/2.

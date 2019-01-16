@@ -1,16 +1,7 @@
 package com.jmesh.controler.data;
 
-import android.content.ContentValues;
-
-import com.jmesh.appbase.dao.CVParse;
 import com.jmesh.appbase.utils.StringUtil;
 import com.jmesh.controler.data.dao.DeviceState;
-import com.jmesh.controler.task.TaskMeterMeterCurrent;
-import com.jmesh.controler.task.TaskMeterMeterEnergyConsume;
-import com.jmesh.controler.task.TaskMeterMeterFrequency;
-import com.jmesh.controler.task.TaskMeterMeterPower;
-import com.jmesh.controler.task.TaskMeterMeterPowerFactor;
-import com.jmesh.controler.task.TaskMeterMeterVolt;
 
 /**
  * Created by Administrator on 2018/11/9.

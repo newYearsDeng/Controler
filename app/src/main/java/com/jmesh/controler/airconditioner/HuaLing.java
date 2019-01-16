@@ -1,6 +1,6 @@
 package com.jmesh.controler.airconditioner;
 
-import com.jmesh.controler.data.AirConditionerData;
+import com.jmesh.lib645.AirConditionerData;
 
 /**
  * Created by Administrator on 2018/11/15.

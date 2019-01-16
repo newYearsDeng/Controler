@@ -2,7 +2,7 @@
 #include "dll.h"
 #include <string.h>
 
-JNIEXPORT int JNICALL Java_com_jmesh_controler_jni_CenterAirConditionerConnector_getAirConditionerStatus(
+JNIEXPORT int JNICALL Java_com_jmesh_lib645_jni_CenterAirConditionerConnector_getAirConditionerStatus(
         JNIEnv *env,
         jobject jo, jbyteArray meterCode,
         jbyteArray dataResult) {
@@ -30,7 +30,7 @@ JNIEXPORT int JNICALL Java_com_jmesh_controler_jni_CenterAirConditionerConnector
     return strlen(output_stru.frame);
 }
 
-JNIEXPORT int JNICALL Java_com_jmesh_controler_jni_CenterAirConditionerConnector_resolveAirConditionerStatus(
+JNIEXPORT int JNICALL Java_com_jmesh_lib645_jni_CenterAirConditionerConnector_resolveAirConditionerStatus(
         JNIEnv *env,
         jobject jo, jbyteArray meterCode, jbyteArray dataSrc,
         jbyteArray dataResult) {

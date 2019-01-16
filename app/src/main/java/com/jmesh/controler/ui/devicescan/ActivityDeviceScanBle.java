@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.jmesh.appbase.base.PermissionUtils;
-import com.jmesh.appbase.base.ToastUtils;
 import com.jmesh.appbase.ui.widget.MyToggleButton;
 import com.jmesh.blebase.base.BleManager;
 import com.jmesh.blebase.callback.BleScanCallback;

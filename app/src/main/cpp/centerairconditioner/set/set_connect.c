@@ -3,7 +3,7 @@
 #include <string.h>
 
 JNIEXPORT int JNICALL
-Java_com_jmesh_controler_jni_CenterAirConditionerConnector_setAirConditioner(
+Java_com_jmesh_lib645_jni_CenterAirConditionerConnector_setAirConditioner(
         JNIEnv *env,
         jobject jo, jbyteArray meterCode, jbyteArray di, jbyteArray srcData,
         jbyteArray dataResult) {

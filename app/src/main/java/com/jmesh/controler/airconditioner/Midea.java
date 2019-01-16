@@ -4,8 +4,8 @@ package com.jmesh.controler.airconditioner;
  * Created by Administrator on 2018/11/23.
  */
 
-import com.jmesh.blebase.utils.JMeshLog;
-import com.jmesh.controler.data.AirConditionerData;
+
+import com.jmesh.lib645.AirConditionerData;
 
 /**
  * 美的空调红外码

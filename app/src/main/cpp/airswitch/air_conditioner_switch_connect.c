@@ -11,7 +11,7 @@
 //5拿到数据后再次调用data_result解析结果
 
 JNIEXPORT int JNICALL
-Java_com_jmesh_controler_jni_AirConditionerSwitchConnector_getAirConditionerSwitchCmd(
+Java_com_jmesh_lib645_jni_AirConditionerSwitchConnector_getAirConditionerSwitchCmd(
         JNIEnv *env,
         jobject jo, jbyteArray meterCode, jbyteArray style,
         jbyteArray dataResult) {
@@ -46,7 +46,7 @@ Java_com_jmesh_controler_jni_AirConditionerSwitchConnector_getAirConditionerSwit
 
 
 JNIEXPORT int JNICALL
-Java_com_jmesh_controler_jni_AirConditionerSwitchConnector_resolveAirConditionerSwitchCmd(
+Java_com_jmesh_lib645_jni_AirConditionerSwitchConnector_resolveAirConditionerSwitchCmd(
         JNIEnv *env,
         jobject jo, jbyteArray meterCode, jbyteArray style, jbyteArray dataSrc,
         jbyteArray dataResult) {

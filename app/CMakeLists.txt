@@ -21,7 +21,6 @@ add_library( # Sets the name of the library.
              src/main/cpp/meter/switch/dll.c
              src/main/cpp/meter/switch/meter_switch_connect.c
 
-
              src/main/cpp/light/dll.h
              src/main/cpp/light/dll.c
              src/main/cpp/light/light_connect.c
@@ -54,8 +53,6 @@ add_library( # Sets the name of the library.
              src/main/cpp/centerairconditioner/set/set_connect.c
 
            )
-
-
 
 find_library(log-lib
               log

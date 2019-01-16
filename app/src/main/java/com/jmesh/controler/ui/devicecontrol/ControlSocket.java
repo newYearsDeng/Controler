@@ -1,9 +1,8 @@
 package com.jmesh.controler.ui.devicecontrol;
 
 import com.jmesh.controler.R;
-import com.jmesh.controler.task.TaskMeterGetSwitchStatus;
-import com.jmesh.controler.task.TaskSocketSwitchOff;
-import com.jmesh.controler.task.TaskSocketSwitchOn;
+import com.jmesh.lib645.task.TaskSocketSwitchOff;
+import com.jmesh.lib645.task.TaskSocketSwitchOn;
 
 /**
  * Created by Administrator on 2018/11/13.

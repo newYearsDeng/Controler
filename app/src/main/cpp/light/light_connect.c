@@ -2,7 +2,7 @@
 #include "dll.h"
 #include <string.h>
 
-JNIEXPORT int JNICALL Java_com_jmesh_controler_jni_LightJniConnector_getLightSwitchCmd(
+JNIEXPORT int JNICALL Java_com_jmesh_lib645_jni_LightJniConnector_getLightSwitchCmd(
         JNIEnv *env,
         jobject jo, jbyteArray meterCode, jbyteArray dataSrc,
         jbyteArray dataResult) {
@@ -37,7 +37,7 @@ JNIEXPORT int JNICALL Java_com_jmesh_controler_jni_LightJniConnector_getLightSwi
 }
 
 
-JNIEXPORT int JNICALL Java_com_jmesh_controler_jni_LightJniConnector_resolveLightSwitchCmd(
+JNIEXPORT int JNICALL Java_com_jmesh_lib645_jni_LightJniConnector_resolveLightSwitchCmd(
         JNIEnv *env,
         jobject jo, jbyteArray meterCode, jbyteArray dataSrc,
         jbyteArray dataResult) {

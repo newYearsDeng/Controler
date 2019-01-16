@@ -2,7 +2,7 @@
 #include "dll.h"
 #include <string.h>
 
-JNIEXPORT int JNICALL Java_com_jmesh_controler_jni_SocketJniConnector_transCmd(
+JNIEXPORT int JNICALL Java_com_jmesh_lib645_jni_SocketJniConnector_transCmd(
         JNIEnv *env,
         jobject jo, jbyteArray meterCode, jbyteArray di,
         jbyteArray dataResult) {
@@ -35,7 +35,7 @@ JNIEXPORT int JNICALL Java_com_jmesh_controler_jni_SocketJniConnector_transCmd(
 }
 
 
-JNIEXPORT int JNICALL Java_com_jmesh_controler_jni_SocketJniConnector_resolveResult(
+JNIEXPORT int JNICALL Java_com_jmesh_lib645_jni_SocketJniConnector_resolveResult(
         JNIEnv *env,
         jobject jo, jbyteArray meterCode, jbyteArray dataSrc,
         jbyteArray dataResult) {

@@ -1,6 +1,6 @@
 package com.jmesh.controler.airconditioner;
 
-import com.jmesh.controler.data.AirConditionerData;
+import com.jmesh.lib645.AirConditionerData;
 
 /**
  * 格力变频
